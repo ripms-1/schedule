@@ -577,7 +577,7 @@ function renderMonth(events) {
   const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const DOWS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const now = new Date();
-  const todayStr = now.toISOString().slice(0,10);
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 
   // Build lookup: date string -> assignments
   const byDate = {};
@@ -670,7 +670,7 @@ function showDayPanel(ds, events) {
         </div>
       </div>
       <div class="asgn-summary" id="sum-${safeId}"></div>
-      ${a.desc?`<button class="summarize-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')" >✦ summarize</button>`:''}
+      <button class="summarize-btn" style="margin-top:6px;" id="sumbtn-${safeId}" onclick="summarize('${safeId}')">✦ summarize</button>
     </div>`;
   }).join('');
   panel.classList.add('on');
@@ -682,7 +682,7 @@ function renderWeek(events) {
   const DOWS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const now = new Date();
-  const todayStr = now.toISOString().slice(0,10);
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 
   // Get start of current week (Sunday) + offset
   const startOfWeek = new Date(now);
@@ -708,7 +708,7 @@ function renderWeek(events) {
   const doneSet = JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
 
   let cols = days.map(d => {
-    const ds = d.toISOString().slice(0,10);
+    const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     const asgns = byDate[ds]||[];
     const isToday = ds===todayStr;
     const cards = asgns.length ? asgns.map(a => {
@@ -790,49 +790,87 @@ async function fetchWithProxy(url) {
   throw new Error('all proxies failed');
 }
 
-function parseICS(text) {
-  const events = [];
-  const blocks = text.split('BEGIN:VEVENT');
-  blocks.slice(1).forEach(block => {
-    const get = (key) => {
-      const match = block.match(new RegExp(key + '[^:]*:([^\r\n]+)'));
-      return match ? match[1].trim() : '';
-    };
-    const summary = get('SUMMARY');
-    const dtstart = get('DTSTART');
-    const desc = get('DESCRIPTION').replace(/\n/g,' ').replace(/\\n/g,' ').substring(0,400);
-    const url = get('URL');
-    const categories = get('CATEGORIES');
-    if (!summary || !dtstart) return;
-    // Parse date
-    let due;
-    if (dtstart.includes('T')) {
-      const d = dtstart.replace(/[^0-9T]/g,'');
-      const yr=d.substring(0,4),mo=d.substring(4,6),dy=d.substring(6,8);
-      const hr=d.substring(9,11),mn=d.substring(11,13);
-      due = new Date(`${yr}-${mo}-${dy}T${hr}:${mn}:00`);
-    } else {
-      due = new Date(dtstart.substring(0,4)+'-'+dtstart.substring(4,6)+'-'+dtstart.substring(6,8));
-    }
-    if (isNaN(due)) return;
-    // Try to extract course name from description or categories
-    const courseMatch = desc.match(/[A-Z]{2,5}\s*\d{2,4}/);
-    const course = categories || (courseMatch ? courseMatch[0] : 'Canvas');
-    events.push({ id: summary+dtstart, summary, due, desc, url, course });
-  });
-  return events;
-}
+
 
 async function loadCanvas() {
   const area = document.getElementById('assignmentsArea');
   const status = document.getElementById('canvasStatus');
   document.getElementById('tokenSetup').style.display = 'none';
-  const events = getFilteredEvents();
-  if(currentView === 'month') { renderMonth(events); }
-  else if(currentView === 'week') { renderWeek(events); }
-  else { renderAssignments_embed(events, status, area); }
-}
 
+  if (currentView === 'month') {
+    const events = getFilteredEvents();
+    renderMonth(events);
+    return;
+  }
+  if (currentView === 'week') {
+    const events = getFilteredEvents();
+    renderWeek(events);
+    return;
+  }
+
+  // List view — try live Canvas first, fall back to embedded data
+  status.textContent = 'syncing canvas...';
+  status.className = 'canvas-status';
+  area.innerHTML = '<div class="empty-state">loading...</div>';
+
+  try {
+    const PROXY = 'https://soln0m-proxy.solomon02162007.workers.dev';
+    const now = new Date();
+
+    // Fetch active courses
+    const coursesRes = await fetch(`${PROXY}/canvas/courses?enrollment_state=active&per_page=20`);
+    if (!coursesRes.ok) throw new Error('courses fetch failed');
+    const courses = await coursesRes.json();
+
+    // Fetch upcoming assignments for each course
+    let all = [];
+    await Promise.all(courses.map(async (c) => {
+      try {
+        const r = await fetch(`${PROXY}/canvas/courses/${c.id}/assignments?bucket=upcoming&per_page=30&order_by=due_at`);
+        if (!r.ok) return;
+        const asgns = await r.json();
+        asgns.forEach(a => {
+          if (a.due_at) {
+            const parts = c.name.split(/[-\s]/);
+            const course = parts.length >= 2 ? `${parts[0]}-${parts[1]}` : c.name.substring(0,12);
+            const desc = (a.description||'').replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').trim().substring(0,300);
+            all.push({
+              id: String(a.id),
+              name: a.name,
+              course: course,
+              due: a.due_at.slice(0,10),
+              desc: desc
+            });
+          }
+        });
+      } catch(e) {}
+    }));
+
+    all.sort((a,b) => new Date(a.due) - new Date(b.due));
+
+    // Update CANVAS_DATA-like structure in memory
+    window._liveAssignments = all;
+
+    // Rebuild ASGN_MAP with live data
+    all.forEach(a => {
+      const safeId = a.id.replace(/[^a-zA-Z0-9]/g,'_');
+      ASGN_MAP[safeId] = a;
+    });
+
+    const upcoming = all.filter(e => new Date(e.due+'T23:59:00') >= now);
+    renderAssignments_embed(upcoming, status, area);
+    status.textContent = `✓ live sync · ${upcoming.length} assignments`;
+    status.className = 'canvas-status ok';
+
+  } catch(err) {
+    console.log('Live Canvas failed, using embedded data:', err.message);
+    // Fall back to embedded CANVAS_DATA
+    const events = getFilteredEvents();
+    renderAssignments_embed(events, status, area);
+    status.textContent = `embedded data · ${events.length} assignments`;
+    status.className = 'canvas-status';
+  }
+}
 
 
 function renderAssignments_embed(events, status, area) {
