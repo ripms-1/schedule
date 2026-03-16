@@ -792,19 +792,57 @@ async function fetchWithProxy(url) {
 
 
 
+// ── LIVE DATA HELPERS ─────────────────────────────────────────────────────────
+window._liveAssignments = null;
+
+async function fetchLiveAssignments() {
+  if (window._liveAssignments !== null) return; // already fetched this session
+  try {
+    const PROXY = 'https://soln0m-proxy.solomon02162007.workers.dev';
+    const coursesRes = await fetch(`${PROXY}/canvas/courses?enrollment_state=active&per_page=20`);
+    if (!coursesRes.ok) return;
+    const courses = await coursesRes.json();
+    let all = [];
+    await Promise.all(courses.map(async (c) => {
+      try {
+        const r = await fetch(`${PROXY}/canvas/courses/${c.id}/assignments?bucket=upcoming&per_page=30&order_by=due_at`);
+        if (!r.ok) return;
+        const asgns = await r.json();
+        asgns.forEach(a => {
+          if (a.due_at) {
+            const parts = c.name.split(/[-\s]/);
+            const course = parts.length >= 2 ? `${parts[0]}-${parts[1]}` : c.name.substring(0,12);
+            const desc = (a.description||'').replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').trim().substring(0,300);
+            all.push({ id: String(a.id), name: a.name, course, due: a.due_at.slice(0,10), desc });
+          }
+        });
+      } catch(e) {}
+    }));
+    all.sort((a,b) => new Date(a.due) - new Date(b.due));
+    window._liveAssignments = all;
+    // Update ASGN_MAP
+    all.forEach(a => { ASGN_MAP[a.id.replace(/[^a-zA-Z0-9]/g,'_')] = a; });
+  } catch(e) {
+    window._liveAssignments = null;
+  }
+}
+
+function getLiveOrEmbedded() {
+  const now = new Date();
+  const src = window._liveAssignments || CANVAS_DATA;
+  return src.filter(e => new Date(e.due+'T23:59:00') >= now);
+}
+
 async function loadCanvas() {
   const area = document.getElementById('assignmentsArea');
   const status = document.getElementById('canvasStatus');
   document.getElementById('tokenSetup').style.display = 'none';
 
-  if (currentView === 'month') {
-    const events = getFilteredEvents();
-    renderMonth(events);
-    return;
-  }
-  if (currentView === 'week') {
-    const events = getFilteredEvents();
-    renderWeek(events);
+  if (currentView === 'month' || currentView === 'week') {
+    await fetchLiveAssignments();
+    const events = getLiveOrEmbedded();
+    if (currentView === 'month') renderMonth(events);
+    else renderWeek(events);
     return;
   }
 
