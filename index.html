@@ -918,45 +918,63 @@ async function loadCanvas() {
 
 function renderAssignments_embed(events, status, area) {
   const now = new Date();
+  now.setHours(0,0,0,0);
+
   if (!events.length) { area.innerHTML='<div class="empty-state">no upcoming assignments 🎉</div>'; return; }
-  const byCourse = {};
-  events.forEach(e => { if(!byCourse[e.course]) byCourse[e.course]=[]; byCourse[e.course].push(e); });
-  area.innerHTML='';
-  const hdr=document.createElement('div'); hdr.className='assignments-header';
-  hdr.innerHTML=`<div class="assignments-title">${events.length} upcoming</div><div style="font-family:JetBrains Mono,monospace;font-size:10px;color:#555;">synced Mar 5</div>`;
+
+  // Group by due date bucket
+  const buckets = { 'Today': [], 'Tomorrow': [], 'This Week': [], 'Later': [] };
+  events.forEach(e => {
+    const due = new Date(e.due + 'T00:00:00');
+    const diff = Math.round((due - now) / 86400000);
+    if (diff <= 0) buckets['Today'].push(e);
+    else if (diff === 1) buckets['Tomorrow'].push(e);
+    else if (diff <= 7) buckets['This Week'].push(e);
+    else buckets['Later'].push(e);
+  });
+
+  area.innerHTML = '';
+  const hdr = document.createElement('div'); hdr.className = 'assignments-header';
+  hdr.innerHTML = `<div class="assignments-title">${events.length} upcoming</div><button class="refresh-btn" onclick="window._liveAssignments=null;loadCanvas()">↻ refresh</button>`;
   area.appendChild(hdr);
-  const doneSet=JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
-  Object.entries(byCourse).forEach(([course,asgns])=>{
-    const sec=document.createElement('div'); sec.className='course-section';
-    sec.innerHTML=`<div class="course-name">${course}</div>`;
-    asgns.forEach(a=>{
-      const due=new Date(a.due+'T23:59:00');
-      const days=Math.ceil((due-now)/86400000);
-      const dueFmt=due.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-      const dueClass=days<=0?'urgent':days<=3?'soon':'';
-      const daysLabel=days<=0?'today':days===1?'tomorrow':`${days}d`;
-      const isDone=doneSet[a.id]||false;
-      const safeId=a.id.replace(/[^a-zA-Z0-9]/g,'_');
-      const card=document.createElement('div');
-      card.className=`assignment-card${isDone?' done-card':''}`;
-      card.id=`card-${safeId}`;
-      const descBtn = a.desc ? `<button class="summarize-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')" >✦ summarize</button>` : '';
-      card.innerHTML=`
+
+  const doneSet = JSON.parse(sessionStorage.getItem('doneAsgn') || '{}');
+
+  Object.entries(buckets).forEach(([label, asgns]) => {
+    if (!asgns.length) return;
+    const sec = document.createElement('div'); sec.className = 'course-section';
+    sec.innerHTML = `<div class="course-name">${label}</div>`;
+    asgns.forEach(a => {
+      const due = new Date(a.due + 'T00:00:00');
+      const diff = Math.round((due - now) / 86400000);
+      const dueFmt = due.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      const dueClass = diff <= 0 ? 'urgent' : diff <= 3 ? 'soon' : '';
+      const isDone = doneSet[a.id] || false;
+      const safeId = a.id.replace(/[^a-zA-Z0-9]/g, '_');
+      const card = document.createElement('div');
+      card.className = `assignment-card${isDone ? ' done-card' : ''}`;
+      card.id = `card-${safeId}`;
+      card.innerHTML = `
         <div class="asgn-top">
           <div class="asgn-left">
-            <div class="asgn-check${isDone?' done':''}" id="chk-${safeId}" onclick="toggleDone('${safeId}')">${isDone?'✓':''}</div>
-            <div class="asgn-name">${a.name}</div>
+            <div class="asgn-check${isDone ? ' done' : ''}" id="chk-${safeId}" onclick="toggleDone('${safeId}')">${isDone ? '✓' : ''}</div>
+            <div>
+              <div class="asgn-name">${a.name}</div>
+              <div style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--text3);margin-top:2px;">${a.course}</div>
+            </div>
           </div>
-          <div class="asgn-due ${dueClass}">${daysLabel}<br>${dueFmt}</div>
+          <div class="asgn-due ${dueClass}">${diff <= 0 ? 'today' : diff === 1 ? 'tmrw' : diff + 'd'}<br>${dueFmt}</div>
         </div>
         <div class="asgn-summary" id="sum-${safeId}"></div>
-        ${descBtn}`;
+        <button class="summarize-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')">✦ summarize</button>`;
       sec.appendChild(card);
     });
     area.appendChild(sec);
   });
-  if(status){ status.textContent=`✓ ${events.length} assignments loaded`; status.className='canvas-status ok'; }
+
+  if (status) { status.textContent = `✓ ${events.length} assignments`; status.className = 'canvas-status ok'; }
 }
+
 
 function toggleDone(id) {
   const done = JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
@@ -976,8 +994,14 @@ CANVAS_DATA.forEach(a => {
 });
 
 async function summarize(safeId) {
-  const a = ASGN_MAP[safeId];
-  if (!a) return;
+  // Try direct lookup first, then search by safeId match
+  let a = ASGN_MAP[safeId];
+  if (!a) {
+    // Search live assignments
+    const src = window._liveAssignments || CANVAS_DATA;
+    a = src.find(x => x.id.replace(/[^a-zA-Z0-9]/g,'_') === safeId);
+  }
+  if (!a) { console.log('summarize: no assignment found for', safeId); return; }
   const sumEl = document.getElementById(`sum-${safeId}`);
   const btn = document.getElementById(`sumbtn-${safeId}`);
   if (!sumEl) return;
