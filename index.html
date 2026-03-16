@@ -1019,12 +1019,14 @@ async function summarize(safeId) {
       })
     });
     const data = await res.json();
+    console.log('Proxy response:', JSON.stringify(data).substring(0,200));
     const text = data.content?.map(c=>c.text||'').join('') || 'Could not summarize.';
     sumEl.className = 'asgn-summary visible';
     sumEl.innerHTML = text.replace(/\n/g,'<br>');
   } catch(e) {
+    console.error('Summarize error:', e);
     sumEl.className = 'asgn-summary visible';
-    sumEl.textContent = 'Could not load summary.';
+    sumEl.textContent = 'Could not load summary: ' + e.message;
     if (btn) btn.style.display = 'inline-block';
   }
 }
