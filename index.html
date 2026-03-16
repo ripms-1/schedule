@@ -1009,18 +1009,14 @@ async function summarize(safeId) {
   sumEl.textContent = 'summarizing...';
   if (btn) btn.style.display = 'none';
   try {
+    const prompt = `Summarize this college assignment in 2-3 short bullet points. Be practical — what needs to be done, key requirements, rough difficulty. Under 80 words total.\n\nAssignment: ${a.name}\n${a.desc?'Details: '+a.desc:'No details available.'}`;
     const res = await fetch('https://soln0m-proxy.solomon02162007.workers.dev', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{role:'user', content:`Summarize this college assignment in 2-3 short bullet points. Be practical — what needs to be done, key requirements, rough difficulty. Under 80 words total.\n\nAssignment: ${a.name}\n${a.desc?'Details: '+a.desc:'No details available.'}`}]
-      })
+      body: JSON.stringify({ prompt })
     });
     const data = await res.json();
-    console.log('Proxy response:', JSON.stringify(data).substring(0,200));
-    const text = data.content?.map(c=>c.text||'').join('') || 'Could not summarize.';
+    const text = data.text || 'Could not summarize.';
     sumEl.className = 'asgn-summary visible';
     sumEl.innerHTML = text.replace(/\n/g,'<br>');
   } catch(e) {
