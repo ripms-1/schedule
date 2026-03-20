@@ -8,6 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{
+<<<<<<< HEAD
   --bg:#0a0a0a;
   --glass:rgba(255,255,255,0.055);
   --glass2:rgba(255,255,255,0.09);
@@ -17,11 +18,29 @@
   --text:#f2f2f2;
   --text2:rgba(242,242,242,0.5);
   --text3:rgba(242,242,242,0.25);
+=======
+  --bg:#060608;
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.07);
+  --glass3:rgba(255,255,255,0.11);
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --text:#f0f0f5;
+  --text2:rgba(240,240,245,0.55);
+  --text3:rgba(240,240,245,0.28);
+  --accent:#a78bfa;
+  --green:#34d399;
+  --red:#f87171;
+  --orange:#fb923c;
+  --blur:blur(24px) saturate(180%);
+  --blur2:blur(40px) saturate(200%);
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
   --r:22px;
   --r2:14px;
   --font:'Geist',system-ui,sans-serif;
   --mono:'Geist Mono',monospace;
 }
+<<<<<<< HEAD
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;overflow:hidden;}
 
 /* ── NOISE TEXTURE ── */
@@ -201,10 +220,136 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* ── ASSIGNMENTS ── */
 .sec-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
 .asgn-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:13px;margin-bottom:8px;transition:border-color 0.2s;backdrop-filter:blur(12px);}
+=======
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;overflow-x:hidden;}
+
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,0.1) 0%,transparent 65%);top:-250px;left:-150px;animation:drift1 22s ease-in-out infinite;}
+.bg-mesh::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,0.06) 0%,transparent 65%);bottom:-200px;right:-100px;animation:drift2 28s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0);}50%{transform:translate(80px,50px);}}
+@keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,-70px);}}
+
+.app{position:relative;z-index:1;min-height:100vh;}
+
+/* ── HOME ── */
+.home{display:flex;flex-direction:column;min-height:100vh;padding:48px 20px 36px;max-width:500px;margin:0 auto;}
+.home.hidden{display:none;}
+
+.home-top{margin-bottom:32px;}
+.home-clock{font-family:var(--mono);font-size:58px;font-weight:300;letter-spacing:-3px;line-height:1;color:var(--text);}
+.home-date{font-size:13px;color:var(--text3);font-family:var(--mono);margin-top:6px;}
+.home-greeting{font-size:15px;color:var(--text2);margin-top:16px;}
+
+.ram-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--glass2);border:1px solid var(--border2);
+  border-radius:100px;padding:7px 16px;
+  backdrop-filter:var(--blur);margin-top:14px;
+}
+.ram-pill-text{font-size:12px;color:var(--text2);font-family:var(--mono);}
+.ram-pill-accent{color:var(--accent);}
+
+.cards{display:flex;flex-direction:column;gap:14px;flex:1;}
+
+.card{
+  position:relative;border-radius:var(--r);
+  border:1px solid var(--border);
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  padding:26px;cursor:pointer;
+  transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s, background 0.2s;
+  overflow:hidden;min-height:130px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.card::before{content:'';position:absolute;inset:0;border-radius:var(--r);background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 50%);pointer-events:none;}
+.card:hover{transform:translateY(-2px) scale(1.01);border-color:var(--border2);}
+.card:active{transform:scale(0.98);}
+
+.card-schedule{background:linear-gradient(145deg,rgba(167,139,250,0.09) 0%,transparent 60%);}
+.card-school{background:linear-gradient(145deg,rgba(52,211,153,0.08) 0%,transparent 60%);}
+.card-freetime{background:linear-gradient(145deg,rgba(251,146,60,0.08) 0%,transparent 60%);}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.card-icon{font-size:30px;}
+.card-badge{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);background:var(--glass2);color:var(--text2);}
+.card-badge.urgent{color:var(--red);border-color:rgba(248,113,113,0.25);}
+.card-badge.ok{color:var(--green);border-color:rgba(52,211,153,0.25);}
+
+.card-bottom{}
+.card-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px;}
+.card-title{font-size:24px;font-weight:600;letter-spacing:-0.5px;}
+.card-schedule .card-title{color:#c4b5fd;}
+.card-school .card-title{color:#6ee7b7;}
+.card-freetime .card-title{color:#fdba74;}
+.card-sub{font-size:12px;color:var(--text3);margin-top:4px;line-height:1.4;}
+
+/* ── VIEWS ── */
+.view{display:none;flex-direction:column;min-height:100vh;max-width:600px;margin:0 auto;}
+.view.active{display:flex;}
+
+.view-header{
+  display:flex;align-items:center;gap:14px;
+  padding:52px 20px 16px;
+  background:rgba(6,6,8,0.85);backdrop-filter:var(--blur2);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--glass2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;color:var(--text2);transition:all 0.2s;flex-shrink:0;
+}
+.back-btn:hover{background:var(--glass3);color:var(--text);}
+.view-title{font-size:18px;font-weight:600;letter-spacing:-0.3px;}
+.view-title-sub{font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:2px;}
+.view-right{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--text3);}
+
+.vtabs{display:flex;padding:0 20px;background:rgba(6,6,8,0.85);backdrop-filter:var(--blur2);border-bottom:1px solid var(--border);position:sticky;top:77px;z-index:99;gap:0;overflow-x:auto;}
+.vtab{background:transparent;border:none;color:var(--text3);font-family:var(--font);font-size:12px;font-weight:500;padding:10px 14px 12px;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.vtab:hover{color:var(--text2);}
+.vtab.active{color:var(--text);border-bottom-color:var(--accent);}
+
+.view-content{flex:1;padding:20px;overflow-y:auto;}
+
+/* ── TIMELINE ── */
+.sleep-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.sleep-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:14px;}
+.sleep-lbl{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;}
+.sleep-val{font-family:var(--mono);font-size:18px;color:var(--text);font-weight:500;}
+
+.tl-block{display:grid;grid-template-columns:62px 1px 1fr;gap:0 14px;min-height:54px;transition:opacity 0.3s;}
+.tl-block.past{opacity:0.18;}
+.tl-block.future{opacity:0.6;}
+.tl-time{font-family:var(--mono);font-size:10px;color:var(--text3);padding-top:18px;text-align:right;}
+.tl-block.current .tl-time{color:var(--accent);opacity:0.8;}
+.tl-spine{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:7px;height:7px;border-radius:50%;background:var(--border2);margin-top:20px;flex-shrink:0;z-index:1;position:relative;transition:all 0.3s;}
+.tl-block.current .tl-dot{background:var(--accent);box-shadow:0 0 0 4px rgba(167,139,250,0.15),0 0 12px rgba(167,139,250,0.3);}
+.tl-line{width:1px;flex:1;background:var(--border);margin-top:3px;}
+.tl-block:last-child .tl-line{display:none;}
+.tl-body{padding:12px 0 14px;}
+.tl-tag{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px;}
+.tl-block.current .tl-tag{color:var(--accent);opacity:0.7;}
+.tl-title{font-size:14px;font-weight:500;color:var(--text2);}
+.tl-block.current .tl-title{color:var(--text);font-weight:600;}
+.tl-note{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.5;}
+.now-indicator{display:grid;grid-template-columns:62px 1px 1fr;gap:0 14px;align-items:center;pointer-events:none;margin:-5px 0;z-index:10;}
+.now-lbl{font-family:var(--mono);font-size:10px;color:var(--accent);text-align:right;}
+.now-dot-col{display:flex;align-items:center;justify-content:center;}
+.now-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(167,139,250,0.2),0 0 10px rgba(167,139,250,0.4);}
+.now-bar{height:1px;background:rgba(167,139,250,0.25);}
+
+/* ── ASSIGNMENTS ── */
+.sec-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.sec-group{margin-bottom:24px;}
+.asgn-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px;transition:border-color 0.2s;}
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 .asgn-card:hover{border-color:var(--border2);}
 .asgn-card.done-card{opacity:0.28;}
 .asgn-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
 .asgn-left{display:flex;gap:10px;align-items:flex-start;flex:1;}
+<<<<<<< HEAD
 .asgn-chk{width:15px;height:15px;border-radius:4px;border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:8px;color:transparent;background:transparent;transition:all 0.15s;flex-shrink:0;margin-top:2px;}
 .asgn-chk.done{background:var(--text);border-color:var(--text);color:#000;font-weight:700;}
 .asgn-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3;}
@@ -259,10 +404,63 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .week-card-name{font-size:10px;color:var(--text2);line-height:1.3;}
 .week-card-course{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:1px;}
 .week-card.hot .week-card-name{color:var(--text);font-weight:600;}
+=======
+.asgn-chk{width:16px;height:16px;border-radius:5px;border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;background:transparent;transition:all 0.15s;flex-shrink:0;margin-top:2px;}
+.asgn-chk.done{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
+.asgn-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.4;}
+.asgn-course{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:2px;}
+.asgn-due{font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;text-align:right;flex-shrink:0;}
+.asgn-due.urgent{color:var(--red);}
+.asgn-due.soon{color:var(--orange);}
+.asgn-summary{font-size:12px;color:var(--text2);margin-top:10px;line-height:1.7;display:none;border-top:1px solid var(--border);padding-top:10px;}
+.asgn-summary.visible{display:block;}
+.asgn-summary.loading{color:var(--text3);font-style:italic;display:block;}
+.sum-btn{background:transparent;border:1px solid var(--border);border-radius:8px;padding:5px 12px;color:var(--text3);font-family:var(--font);font-size:11px;cursor:pointer;transition:all 0.15s;margin-top:8px;display:inline-block;}
+.sum-btn:hover{color:var(--accent);border-color:rgba(167,139,250,0.35);}
+.asgn-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.asgn-count{font-size:15px;font-weight:600;}
+.refresh-btn{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:5px 12px;color:var(--text3);font-family:var(--mono);font-size:10px;cursor:pointer;transition:all 0.15s;}
+.refresh-btn:hover{color:var(--text2);}
+
+/* ── CALENDAR ── */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.cal-nav-title{font-size:15px;font-weight:600;}
+.cal-nav-btn{background:var(--glass);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:14px;padding:6px 14px;cursor:pointer;transition:all 0.15s;}
+.cal-nav-btn:hover{background:var(--glass2);color:var(--text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:14px;}
+.cal-dow{background:rgba(6,6,8,0.95);padding:8px 4px;text-align:center;font-family:var(--mono);font-size:9px;color:var(--text3);}
+.cal-day{background:var(--bg);min-height:60px;padding:5px 4px;cursor:pointer;transition:background 0.12s;overflow:hidden;}
+.cal-day:hover{background:var(--glass2);}
+.cal-day.other-month{opacity:0.18;}
+.cal-day.today{background:rgba(167,139,250,0.07);}
+.cal-day.today .cal-dn{color:var(--accent);font-weight:700;}
+.cal-day.selected{outline:1px solid var(--accent);outline-offset:-1px;}
+.cal-dn{font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:3px;}
+.cal-dot{font-size:9px;color:var(--text2);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--glass2);border-radius:3px;padding:1px 3px;margin-bottom:2px;display:block;}
+.cal-dot.u{color:var(--red);background:rgba(248,113,113,0.1);}
+.cal-dot.s{color:var(--orange);background:rgba(251,146,60,0.08);}
+.cal-more{font-size:9px;color:var(--text3);font-family:var(--mono);}
+.day-panel{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:14px;display:none;backdrop-filter:var(--blur);}
+.day-panel.on{display:block;}
+.day-panel-title{font-family:var(--mono);font-size:10px;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;}
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.week-nav-title{font-size:14px;font-weight:600;}
+.week-cols{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.week-col-hdr{text-align:center;margin-bottom:8px;}
+.week-dow{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;}
+.week-num{font-family:var(--mono);font-size:17px;color:var(--text2);line-height:1;margin-top:2px;}
+.week-col.is-today .week-num{color:var(--accent);font-weight:700;}
+.week-card{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:6px 8px;margin-bottom:4px;}
+.week-card-name{font-size:10px;color:var(--text2);line-height:1.3;}
+.week-card-course{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px;}
+.week-card.u .week-card-name{color:var(--red);}
+.week-card.s .week-card-name{color:var(--orange);}
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 .week-empty{font-size:10px;color:var(--text3);text-align:center;padding:10px 0;font-family:var(--mono);}
 
 /* ── FREE TIME ── */
 .bored-btn{
+<<<<<<< HEAD
   width:100%;padding:18px;margin-bottom:14px;
   background:var(--glass2);border:1px solid var(--border2);
   border-radius:var(--r);color:var(--text);font-family:var(--font);
@@ -407,11 +605,98 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="card-title">Free Time</div>
           <div class="card-sub">links · bored · roadmap</div>
         </div>
+=======
+  width:100%;padding:22px;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(167,139,250,0.1),rgba(129,140,248,0.06));
+  border:1px solid rgba(167,139,250,0.2);border-radius:var(--r);
+  color:var(--text);font-family:var(--font);font-size:15px;font-weight:500;
+  cursor:pointer;transition:all 0.25s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  backdrop-filter:var(--blur);
+}
+.bored-btn:hover{background:linear-gradient(135deg,rgba(167,139,250,0.17),rgba(129,140,248,0.1));transform:translateY(-1px);}
+.bored-btn:active{transform:scale(0.99);}
+.bored-result{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:20px;font-size:13px;color:var(--text2);line-height:1.8;display:none;}
+.bored-result.visible{display:block;}
+.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.link-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:16px;text-decoration:none;transition:all 0.2s;display:flex;flex-direction:column;gap:5px;}
+.link-card:hover{background:var(--glass2);border-color:var(--border2);transform:translateY(-1px);}
+.link-icon{font-size:22px;}
+.link-name{font-size:13px;font-weight:500;color:var(--text);}
+.link-sub{font-size:11px;color:var(--text3);}
+.thm-card,.cyber-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:16px;}
+.thm-header,.cyber-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.thm-title,.cyber-title{font-size:14px;font-weight:600;}
+.thm-badge{font-family:var(--mono);font-size:10px;color:var(--green);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:100px;padding:3px 10px;}
+.thm-stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+.thm-stat:last-child{border-bottom:none;}
+.thm-stat-lbl{font-size:12px;color:var(--text2);}
+.thm-stat-val{font-family:var(--mono);font-size:12px;color:var(--text);}
+.skill-row{display:flex;align-items:center;gap:10px;padding:7px 0;}
+.skill-name{font-size:12px;color:var(--text2);width:150px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:3px;background:var(--glass3);border-radius:2px;overflow:hidden;}
+.skill-bar{height:100%;background:linear-gradient(90deg,var(--accent),#818cf8);border-radius:2px;}
+.skill-pct{font-family:var(--mono);font-size:10px;color:var(--text3);width:30px;text-align:right;}
+.cert-path{margin-top:14px;font-size:11px;color:var(--text3);line-height:1.7;}
+
+.empty-state{text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;}
+.status-ok{font-family:var(--mono);font-size:10px;color:var(--green);}
+.status-err{font-family:var(--mono);font-size:10px;color:var(--red);}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="app">
+
+<!-- HOME -->
+<div class="home" id="home">
+  <div class="home-top">
+    <div class="home-clock" id="homeClock">--:--</div>
+    <div class="home-date" id="homeDate">—</div>
+    <div class="home-greeting">what's up, Solo 👋</div>
+    <div class="ram-pill">
+      <span style="font-size:14px;">☽</span>
+      <span class="ram-pill-text">Ramadan · Day <span class="ram-pill-accent" id="ramDayNum">—</span> of 30 · iftar <span class="ram-pill-accent" id="iftarTime">—</span></span>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card card-schedule" onclick="openView('schedule')">
+      <div class="card-top">
+        <div class="card-icon">🕐</div>
+        <div class="card-badge ok" id="schedBadge">today</div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-label">right now</div>
+        <div class="card-title">Schedule</div>
+        <div class="card-sub" id="schedCardSub">loading...</div>
+      </div>
+    </div>
+    <div class="card card-school" onclick="openView('school')">
+      <div class="card-top">
+        <div class="card-icon">📚</div>
+        <div class="card-badge" id="schoolBadge">—</div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-label">canvas · live sync</div>
+        <div class="card-title">School</div>
+        <div class="card-sub" id="schoolCardSub">tap to sync</div>
+      </div>
+    </div>
+    <div class="card card-freetime" onclick="openView('freetime')">
+      <div class="card-top">
+        <div class="card-icon">🎮</div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-label">downtime</div>
+        <div class="card-title">Free Time</div>
+        <div class="card-sub">TryHackMe · links · I'm bored</div>
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
       </div>
     </div>
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- ═══════════════════════════════════════════════════════
      SCHEDULE
 ════════════════════════════════════════════════════════ -->
@@ -425,6 +710,28 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <div class="view-right" id="schedNow">—</div>
   </div>
   <div class="vtabs" id="schedTabs"></div>
+=======
+<!-- SCHEDULE VIEW -->
+<div class="view" id="view-schedule">
+  <div class="view-header">
+    <div class="back-btn" onclick="goHome()">←</div>
+    <div>
+      <div class="view-title" id="schedViewTitle">Schedule</div>
+      <div class="view-title-sub" id="schedViewSub">—</div>
+    </div>
+    <div class="view-right" id="schedNowPill">—</div>
+  </div>
+  <div class="vtabs" id="schedTabs">
+    <button class="vtab active" onclick="schedTab('day',this)">Today</button>
+    <button class="vtab" onclick="schedTab('monday',this)">Mon</button>
+    <button class="vtab" onclick="schedTab('tuesday',this)">Tue</button>
+    <button class="vtab" onclick="schedTab('wednesday',this)">Wed</button>
+    <button class="vtab" onclick="schedTab('thursday',this)">Thu</button>
+    <button class="vtab" onclick="schedTab('friday',this)">Fri</button>
+    <button class="vtab" onclick="schedTab('saturday',this)">Sat</button>
+    <button class="vtab" onclick="schedTab('sunday',this)">Sun</button>
+  </div>
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
   <div class="view-content">
     <div class="sleep-row">
       <div class="sleep-card"><div class="sleep-lbl">bed</div><div class="sleep-val" id="sbedTime">—</div></div>
@@ -434,6 +741,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- ═══════════════════════════════════════════════════════
      SCHOOL
 ════════════════════════════════════════════════════════ -->
@@ -452,6 +760,16 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <span style="font-family:var(--mono);font-size:9px;color:var(--text2);" id="semPct2">—</span>
     </div>
     <div class="school-sem-bar"><div class="school-sem-fill" id="semFill2"></div></div>
+=======
+<!-- SCHOOL VIEW -->
+<div class="view" id="view-school">
+  <div class="view-header">
+    <div class="back-btn" onclick="goHome()">←</div>
+    <div>
+      <div class="view-title">School</div>
+      <div class="view-title-sub" id="schoolSyncStatus">—</div>
+    </div>
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
   </div>
   <div class="vtabs">
     <button class="vtab active" id="vbList" onclick="setAssignView('list')">List</button>
@@ -461,6 +779,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <div class="view-content" id="assignmentsArea"></div>
 </div>
 
+<<<<<<< HEAD
 <!-- ═══════════════════════════════════════════════════════
      WORKOUT
 ════════════════════════════════════════════════════════ -->
@@ -654,6 +973,72 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </div><!-- /app -->
 <script>
 
+=======
+<!-- FREE TIME VIEW -->
+<div class="view" id="view-freetime">
+  <div class="view-header">
+    <div class="back-btn" onclick="goHome()">←</div>
+    <div><div class="view-title">Free Time</div></div>
+  </div>
+  <div class="view-content">
+    <button class="bored-btn" onclick="imBored()">
+      <span>✦</span> I'm bored — what should I do?
+    </button>
+    <div class="bored-result" id="boredResult"></div>
+
+    <div class="sec-label" style="margin-bottom:12px;">quick links</div>
+    <div class="links-grid" style="margin-bottom:24px;">
+      <a class="link-card" href="https://tryhackme.com" target="_blank">
+        <div class="link-icon">🔓</div>
+        <div class="link-name">TryHackMe</div>
+        <div class="link-sub">ripms</div>
+      </a>
+      <a class="link-card" href="https://youtube.com" target="_blank">
+        <div class="link-icon">▶️</div>
+        <div class="link-name">YouTube</div>
+        <div class="link-sub">subscriptions</div>
+      </a>
+      <a class="link-card" href="https://minecraft.net" target="_blank">
+        <div class="link-icon">⛏️</div>
+        <div class="link-name">Minecraft</div>
+        <div class="link-sub">mace pvp</div>
+      </a>
+      <a class="link-card" href="https://wvm.instructure.com" target="_blank">
+        <div class="link-icon">🎓</div>
+        <div class="link-name">Canvas</div>
+        <div class="link-sub">wvm</div>
+      </a>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:12px;">tryhackme</div>
+    <div class="thm-card">
+      <div class="thm-header">
+        <div class="thm-title">ripms</div>
+        <div class="thm-badge" id="thmRank">—</div>
+      </div>
+      <div id="thmStats"><div style="color:var(--text3);font-size:12px;">loading...</div></div>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:12px;">red team roadmap</div>
+    <div class="cyber-card">
+      <div class="cyber-header">
+        <div class="cyber-title">Skills Progress</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">→ OSCP</div>
+      </div>
+      <div class="skill-row"><div class="skill-name">Linux fundamentals</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div><div class="skill-pct">70%</div></div>
+      <div class="skill-row"><div class="skill-name">Networking</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:50%"></div></div><div class="skill-pct">50%</div></div>
+      <div class="skill-row"><div class="skill-name">Web app security</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div><div class="skill-pct">35%</div></div>
+      <div class="skill-row"><div class="skill-name">OSINT</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div><div class="skill-pct">60%</div></div>
+      <div class="skill-row"><div class="skill-name">Python scripting</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div><div class="skill-pct">40%</div></div>
+      <div class="skill-row"><div class="skill-name">Exploit dev</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:10%"></div></div><div class="skill-pct">10%</div></div>
+      <div class="cert-path">Next cert: <span style="color:var(--accent);font-weight:500;">CompTIA Security+</span> → CEH → OSCP</div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 const PT = {
   15:{fIq:'5:40 AM',mg:'6:08 PM',iIq:'8:00 PM',te:'9:30 PM'},
   16:{fIq:'5:40 AM',mg:'6:09 PM',iIq:'8:00 PM',te:'9:30 PM'},
@@ -675,6 +1060,7 @@ const PT = {
 
 const CANVAS_DATA = [{"id": "event-assignment-1469984", "name": "Sharing Knowledge Topic", "course": "ENGL-C1000", "due": "2026-03-05", "desc": "Create a 1-2 minute video that sets out the topic for your Sharing Knowledge project.  Your topic should draw on your personal knowledge or experience and align with the assignment guidelines. You must appear on camera in the video\\; you may also include graphics or other visual elements to enhance "}, {"id": "event-assignment-1503416", "name": "ZB06", "course": "CIS-037A", "due": "2026-03-05", "desc": ""}, {"id": "event-assignment-1503460", "name": "Midterm Exam", "course": "CIS-037A", "due": "2026-03-08", "desc": "✅ Instructions: --------------- * This exam is open notes, open book, and open Internet. * Work alone – no collaboration, no copying, no AI tools other than your compiler and editor. * No Zoom or lecture sessions on exam day. * Submit the following: * All C source code files (.c files) * Screenshots"}, {"id": "event-assignment-1469983", "name": "Sharing Knowledge Essay - Outline", "course": "ENGL-C1000", "due": "2026-03-08", "desc": ""}, {"id": "event-assignment-1469954", "name": "Week 2 Discussion Forum", "course": "ENGL-C1000", "due": "2026-03-08", "desc": "Discussion is a central and essential part of this class. It will provide the opportunity to explore ideas, exchange perspectives, and deepen our understanding together. Each week, we will use the discussion forum to engage with the readings and course materials.   Participation Requirements The dis"}, {"id": "event-assignment-1472549", "name": "Chapter 6 Programming Assignment", "course": "CIS-043", "due": "2026-03-09", "desc": "Ch 6 Programming Assignment: Ex 6.16(Multiples) Ex 6.20 (Circle Area) Ex 6.22 (Temperature Conversions) Ex 6.25 ab (Prime Numbers) Optional: 6.30 (Guess the Number) (Note: 10th edition of the textbook has the same exercises) Assignment Hints: Sample output: Ch6 Sample Output.txt"}, {"id": "event-assignment-1472535", "name": "Chapter 6 Quiz", "course": "CIS-043", "due": "2026-03-09", "desc": ""}, {"id": "event-assignment-1469981", "name": "Sharing Knowledge Essay - Draft", "course": "ENGL-C1000", "due": "2026-03-12", "desc": ""}, {"id": "event-assignment-1469980", "name": "Sharing Knowledge Draft Feedback", "course": "ENGL-C1000", "due": "2026-03-15", "desc": ""}, {"id": "event-assignment-1469955", "name": "Week 3 Discussion Forum", "course": "ENGL-C1000", "due": "2026-03-15", "desc": ""}, {"id": "event-assignment-1472550", "name": "Chapter 7 Programming Assignment", "course": "CIS-043", "due": "2026-03-16", "desc": "Ch 7 Programming Assignment  Ex 7.8 (Array Practice ) Optional:  (Ex 7.17) (Dice Rolling) (Ex 7.29a)  (Fibonacci Series) (Note: 10th edition of the textbook has the same exercises) Assignment hints:  Ch_7_Sample_Output_with_Notes.txt"}, {"id": "event-assignment-1472531", "name": "Chapter 7 Quiz", "course": "CIS-043", "due": "2026-03-16", "desc": ""}, {"id": "event-assignment-override-99192", "name": "Teaming Up Section 32075 (CIS-043-32075)", "course": "CIS-043", "due": "2026-03-16", "desc": "This discussion is set up to facilitate team sign ups for the term project.  This forum is for students in section 32075.   Project teams will have around 3-5 students from the same section in each team.  Try to self-form teams with shared interest, commitments and varied level of programming skills"}, {"id": "event-assignment-1469982", "name": "Sharing Knowledge Essay - Final Version", "course": "ENGL-C1000", "due": "2026-03-19", "desc": ""}, {"id": "event-assignment-1469972", "name": "Learning Reflection #1: Sharing Knowledge", "course": "ENGL-C1000", "due": "2026-03-22", "desc": ""}, {"id": "event-assignment-1469956", "name": "Week 4 Discussion Forum", "course": "ENGL-C1000", "due": "2026-03-22", "desc": ""}, {"id": "event-assignment-1472541", "name": "Team Confirmation", "course": "CIS-043", "due": "2026-03-23", "desc": "After you have formed teams, please officially sign up to a team on Canvas by 1. Go to \"People\"  on the left navigation on Canvas. 2. Click on Project Teams tab 3. Pick the team number, then click on Join. Here is a sample screenshot Team Project Sign-up Image.png Each member will need to join the s"}, {"id": "event-assignment-1469970", "name": "I Search Project: Topic Proposal", "course": "ENGL-C1000", "due": "2026-03-26", "desc": ""}, {"id": "event-assignment-1469943", "name": "Check-In Survey #2", "course": "ENGL-C1000", "due": "2026-03-29", "desc": ""}, {"id": "event-assignment-1469971", "name": "I Search Project: Working Bibliography", "course": "ENGL-C1000", "due": "2026-03-29", "desc": ""}, {"id": "event-assignment-1469957", "name": "Week 5 Discussion Forum", "course": "ENGL-C1000", "due": "2026-03-29", "desc": ""}, {"id": "event-assignment-1472551", "name": "Chapter 8 Programming Assignment", "course": "CIS-043", "due": "2026-03-30", "desc": "Ch 8 Programming Assignment: Ex 8.4 (Rectangle Class) Ex 8.6 (Savings Account Class) Ex 8.8 (Enhancing Class Date) Optional: (Ex 8.15) (Date Class) (Note: 10th edition of the textbook has the same exercises)   Assignment hints:  Ch 8 SampleOutput.txt [] ("}, {"id": "event-assignment-1472528", "name": "Chapter 8 Quiz", "course": "CIS-043", "due": "2026-03-30", "desc": ""}, {"id": "event-assignment-1469969", "name": "I Search Project: Evaluating Sources", "course": "ENGL-C1000", "due": "2026-04-09", "desc": ""}, {"id": "event-assignment-1469968", "name": "I Search Paper - Outline", "course": "ENGL-C1000", "due": "2026-04-12", "desc": ""}, {"id": "event-assignment-1469950", "name": "Week 6 Discussion Forum", "course": "ENGL-C1000", "due": "2026-04-12", "desc": ""}, {"id": "event-assignment-1472552", "name": "Chapter 9 Programming Assignment", "course": "CIS-043", "due": "2026-04-13", "desc": "Ch 9 Programming Assignment Ex 9.8 (Quadrilateral Inheritance Hierarchy) (Note: 10th edition of the textbook has the same exercises)   Assignment Hints: Inheritance Hierarchy Diagram: Quadrilateral Inheritance with sample shape image.png Sample output: Ch 9 Sample Output.txt"}, {"id": "event-assignment-1472532", "name": "Chapter 9 Quiz", "course": "CIS-043", "due": "2026-04-13", "desc": ""}, {"id": "event-assignment-1472555", "name": "Project Progress Report-Scope", "course": "CIS-043", "due": "2026-04-13", "desc": "Team members should take turns to write a brief progress report for your project. One submission per team. Sample 1 :  Status:  Our team is at project idea and scope phase of our project.  We had a few ideas for the project and finalized on .....   We are in discussion on the main functionalities of"}, {"id": "event-assignment-1469966", "name": "I Search Paper - Draft", "course": "ENGL-C1000", "due": "2026-04-16", "desc": ""}, {"id": "event-assignment-1469965", "name": "I Search Draft Feedback", "course": "ENGL-C1000", "due": "2026-04-19", "desc": ""}, {"id": "event-assignment-1469958", "name": "Week 7 Discussion Forum", "course": "ENGL-C1000", "due": "2026-04-19", "desc": ""}, {"id": "event-assignment-1472543", "name": "Chapter 10 Programming Assignment", "course": "CIS-043", "due": "2026-04-20", "desc": "Ch 10 Programming Assignment Ex 10.13 (Payroll System Modification - birthdate) Ex 10.15 (Payroll System Modification - PieceWorker)   Note: 10th edition of the textbook has difference exercise numbers, use the following: Ex 10.12 (Payroll System Modification - birthdate Ex 10.14 (Payroll System Mod"}, {"id": "event-assignment-1472524", "name": "Chapter 10 Quiz", "course": "CIS-043", "due": "2026-04-20", "desc": ""}, {"id": "event-assignment-1472553", "name": "Project Progress Report-Design", "course": "CIS-043", "due": "2026-04-20", "desc": "One team member post a brief progress report for your project.  Report on what the team have done, project status and team work."}, {"id": "event-assignment-1469967", "name": "I Search Paper - Final Version", "course": "ENGL-C1000", "due": "2026-04-23", "desc": ""}, {"id": "event-assignment-1469973", "name": "Learning Reflection #2: I Search", "course": "ENGL-C1000", "due": "2026-04-26", "desc": ""}, {"id": "event-assignment-1469947", "name": "Week 8 Discussion Forum", "course": "ENGL-C1000", "due": "2026-04-26", "desc": ""}, {"id": "event-assignment-1472533", "name": "Chapter 12 Quiz", "course": "CIS-043", "due": "2026-04-27", "desc": ""}, {"id": "event-assignment-1469978", "name": "Persuasion Project: Topic Proposal", "course": "ENGL-C1000", "due": "2026-04-30", "desc": ""}, {"id": "event-assignment-1469979", "name": "Persuasion Project: Working Bibliography", "course": "ENGL-C1000", "due": "2026-05-03", "desc": ""}, {"id": "event-assignment-1469946", "name": "Week 9 Discussion Forum", "course": "ENGL-C1000", "due": "2026-05-03", "desc": ""}, {"id": "event-assignment-1472527", "name": "Chapter 14-15 Quiz", "course": "CIS-043", "due": "2026-05-04", "desc": ""}, {"id": "event-assignment-1472554", "name": "Project Progress Report-Prototype", "course": "CIS-043", "due": "2026-05-04", "desc": "One team member post a brief progress report for your project.  Report on what the team have done, project status and team work."}, {"id": "event-assignment-1469976", "name": "Persuasion Project: Draft a Thesis and Outline", "course": "ENGL-C1000", "due": "2026-05-07", "desc": ""}, {"id": "event-assignment-1469975", "name": "Persuasion Project: Draft (Optional)", "course": "ENGL-C1000", "due": "2026-05-10", "desc": ""}, {"id": "event-assignment-1469948", "name": "Week 10 Discussion Forum", "course": "ENGL-C1000", "due": "2026-05-10", "desc": ""}, {"id": "event-assignment-1472523", "name": "Chapter 11 Quiz", "course": "CIS-043", "due": "2026-05-11", "desc": ""}, {"id": "event-assignment-1472556", "name": "Term Project Final Submission", "course": "CIS-043", "due": "2026-05-13", "desc": "Please submit your final project documentation (word or PDF), one submission per team. Also indicate each member's contributions in the submission comment area."}, {"id": "event-assignment-1469964", "name": "Create the Persuasive Work", "course": "ENGL-C1000", "due": "2026-05-14", "desc": ""}, {"id": "event-assignment-1469977", "name": "Persuasion Project: Explanation", "course": "ENGL-C1000", "due": "2026-05-17", "desc": ""}, {"id": "event-assignment-1469949", "name": "Week 11 Discussion Forum", "course": "ENGL-C1000", "due": "2026-05-17", "desc": ""}, {"id": "event-assignment-1469974", "name": "Learning Reflection #3: Persuasion Project and Course", "course": "ENGL-C1000", "due": "2026-05-20", "desc": ""}, {"id": "event-assignment-1469945", "name": "Course Grade Reflection", "course": "ENGL-C1000", "due": "2026-05-22", "desc": "For the course grade, the College requires that I input a letter grade. Assuming you have met the minimum requirements, you will select that grade. At a minimum, to pass the class you must complete the Sharing Knowledge Essay, the Learn and Share Knowledge Essay, the Argument Project, and the three "}, {"id": "event-assignment-1478650", "name": "Homework 1.2 Basic Classes of Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478651", "name": "Homework 1.3 Trigonometric Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478652", "name": "Homework 1.4 Inverse Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478653", "name": "Homework 1.5 Exponential and Logarithmic Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478654", "name": "Homework 2.1 A Preview of Calculus", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478655", "name": "Homework 2.2 The Limit of a Function", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478656", "name": "Homework 2.3 The Limit Laws", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478657", "name": "Homework 2.4 Continuity", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478658", "name": "Homework 2.5 The Precise Definition of a Limit", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478659", "name": "Homework 3.1 Defining the Derivative", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478660", "name": "Homework 3.2 The Derivative as a Function", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478661", "name": "Homework 3.3 Differentiation Rules", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478662", "name": "Homework 3.4 Derivatives as Rates of Change", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478663", "name": "Homework 3.5 Derivatives of Trigonometric Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478664", "name": "Homework 3.6 The Chain Rule", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478665", "name": "Homework 3.7 Derivatives of Inverse Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478666", "name": "Homework 3.8 Implicit Differentiation", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478667", "name": "Homework 3.9 Derivatives of Exponential and Logarithmic Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478668", "name": "Homework 4.1 Related Rates", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478669", "name": "Homework 4.2 Linear Approximations and Differentials", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478670", "name": "Homework 4.3 Maxima and Minima", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478671", "name": "Homework 4.4 The Mean Value Theorem", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478672", "name": "Homework 4.5 Derivatives and the Shape of a Graph", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478673", "name": "Homework 4.6 Limits at Infinity and Asymptotes", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478674", "name": "Homework 4.7 Applied Optimization Problems", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478675", "name": "Homework 4.8 L&rsquo\\;H&ocirc\\;pital&rsquo\\;s Rule", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478677", "name": "Homework 4.10 Antiderivatives", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478678", "name": "Homework 5.1 Approximating Areas", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478679", "name": "Homework 5.2 The Definite Integral", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478680", "name": "Homework 5.3 The Fundamental Theorem of Calculus", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478681", "name": "Homework 5.4 Integration Formulas and the Net Change Theorem", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478682", "name": "Homework 5.5 Substitution", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478683", "name": "Homework 5.6 Integrals Involving Exponential & Logarithmic Functions", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1478676", "name": "Optional - Homework 4.9 Newton's Method", "course": "MAT-003A", "due": "2026-05-22", "desc": ""}, {"id": "event-assignment-1440827", "name": "2025 West Valley-Mission \"U Got This\" for Community Colleges", "course": "Other", "due": "2026-05-31", "desc": ""}];
 
+<<<<<<< HEAD
 const GCAL_EVENTS = [
   {name:"Jean shopping date w Isa",date:"2026-03-19",time:"4:30 PM",location:"Great Mall, Milpitas"},
   {name:"Photo Walk w Isa",date:"2026-03-24",time:"4:30 PM",location:"Central Park SC"},
@@ -711,21 +1097,30 @@ const PRAYER_DEFAULT = {f:'5:45 AM',d:'1:00 PM',a:'4:30 PM',m:'7:25 PM',i:'8:50 
 
 
 
+=======
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 function parseMin(str){if(!str)return null;const[time,period]=str.split(' ');let[h,m]=time.split(':').map(Number);if(period==='PM'&&h!==12)h+=12;if(period==='AM'&&h===12)h=0;return h*60+m;}
 function nowMin(){const n=new Date();return n.getHours()*60+n.getMinutes();}
 function fmtClock(d){let h=d.getHours(),m=d.getMinutes();const ap=h>=12?'PM':'AM';h=h%12||12;return `${h}:${String(m).padStart(2,'0')} ${ap}`;}
 function getRamDay(){const start=new Date('2026-02-18');const today=new Date();start.setHours(0,0,0,0);today.setHours(0,0,0,0);return Math.min(Math.max(Math.floor((today-start)/86400000)+1,1),30);}
 function localDateStr(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+<<<<<<< HEAD
 function getTodayPrayers(){const rd=getRamDay();return PRAYER_SCHEDULE[rd]||PRAYER_DEFAULT;}
+=======
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 
 const DAYS=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
 const DSHORT={sunday:'Sun',monday:'Mon',tuesday:'Tue',wednesday:'Wed',thursday:'Thu',friday:'Fri',saturday:'Sat'};
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTHS_LONG=['January','February','March','April','May','June','July','August','September','October','November','December'];
+<<<<<<< HEAD
 const DAYS_SHORT_WK=['S','M','T','W','T','F','S'];
 const MUSCLES=['Chest','Back','Shoulders','Arms','Core','Legs','Cardio','Full Body'];
 const EXTRA_MUSCLES=['Cardio','Full Body'];
 
+=======
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 
 function buildSched(day, rd) {
   const p = PT[rd]||PT[15];
@@ -775,18 +1170,24 @@ function buildSched(day, rd) {
 
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
+<<<<<<< HEAD
 const ASGN_MAP = {};
 CANVAS_DATA.forEach(a=>{const sid=a.id.replace(/[^a-zA-Z0-9]/g,'_');ASGN_MAP[sid]=a;ASGN_MAP[a.id]=a;});
 window._liveAssignments = null;
 let currentScreen = 'home';
 let schedDay = DAYS[new Date().getDay()];
 let assignView = 'list';
+=======
+let schedDay = DAYS[new Date().getDay()];
+let currentView = 'list';
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 let calMonth = new Date().getMonth();
 let calYear = new Date().getFullYear();
 let weekOffset = 0;
 let selectedDay = null;
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
+<<<<<<< HEAD
 function nav(name) {
   const from = document.getElementById(currentScreen);
   const to = document.getElementById(name);
@@ -838,11 +1239,52 @@ function renderSched() {
   const nm=isToday?nowMin():-1; let insertedNow=false;
   sched.blocks.forEach(b=>{
     const sMin=parseMin(b.time); const eMin=b.end?parseMin(b.end):null;
+=======
+function openView(name){
+  document.getElementById('home').classList.add('hidden');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(`view-${name}`).classList.add('active');
+  if(name==='schedule') renderSched();
+  if(name==='school') loadCanvas();
+  if(name==='freetime') loadTHM();
+}
+function goHome(){
+  document.getElementById('home').classList.remove('hidden');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+}
+
+// ── SCHEDULE ──────────────────────────────────────────────────────────────────
+function schedTab(d, el){
+  schedDay = d === 'day' ? DAYS[new Date().getDay()] : d;
+  document.querySelectorAll('#schedTabs .vtab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderSched();
+}
+
+function renderSched(){
+  const ramDay=getRamDay();
+  const sched=buildSched(schedDay,ramDay);
+  const todayName=DAYS[new Date().getDay()];
+  const isToday=schedDay===todayName;
+  const now=new Date();
+  document.getElementById('schedViewTitle').textContent=DSHORT[schedDay]+(isToday?' · Today':'');
+  document.getElementById('schedViewSub').textContent=`${MONTHS[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+  document.getElementById('sbedTime').textContent=sched.sleep.bed;
+  document.getElementById('swakeTime').textContent=sched.sleep.wake;
+  const c=document.getElementById('timeline'); c.innerHTML='';
+  const nm=isToday?nowMin():-1; let insertedNow=false;
+  sched.blocks.forEach(b=>{
+    const sMin=parseMin(b.time);const eMin=b.end?parseMin(b.end):null;
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
     let cls='future';
     if(isToday){if(eMin!==null&&nm>=eMin)cls='past';else if(nm>=sMin)cls='current';}
     if(isToday&&cls==='current'&&!insertedNow){
       insertedNow=true;
+<<<<<<< HEAD
       const nl=document.createElement('div');nl.className='now-line';
+=======
+      const nl=document.createElement('div');nl.className='now-indicator';nl.id='nowIndicator';
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
       nl.innerHTML=`<div class="now-lbl" id="nowLbl">${fmtClock(now)}</div><div class="now-dot-col"><div class="now-dot"></div></div><div class="now-bar"></div>`;
       c.appendChild(nl);
     }
@@ -851,6 +1293,7 @@ function renderSched() {
     c.appendChild(row);
   });
   setTimeout(()=>{const cur=c.querySelector('.tl-block.current');if(cur)cur.scrollIntoView({behavior:'smooth',block:'center'});},150);
+<<<<<<< HEAD
 }
 
 // ── SEMESTER BARS ─────────────────────────────────────────────────────────────
@@ -943,6 +1386,78 @@ async function fetchLiveAssignments(){
     all.sort((a,b)=>new Date(a.due)-new Date(b.due));window._liveAssignments=all;all.forEach(a=>{const sid=a.id.replace(/[^a-zA-Z0-9]/g,'_');ASGN_MAP[sid]=a;ASGN_MAP[a.id]=a;});
   }catch(e){window._liveAssignments=null;}
 }
+=======
+}
+
+// ── HOME UPDATES ──────────────────────────────────────────────────────────────
+function updateHome(){
+  const now=new Date();const ramDay=getRamDay();const todayName=DAYS[now.getDay()];
+  const sched=buildSched(todayName,ramDay);const nm=nowMin();
+  const curBlock=sched.blocks.find(b=>{const s=parseMin(b.time);const e=b.end?parseMin(b.end):9999;return nm>=s&&nm<e;});
+  if(curBlock) document.getElementById('schedCardSub').textContent=curBlock.title.replace(/[\u{1F300}-\u{1F9FF}]/gu,'').trim();
+  document.getElementById('ramDayNum').textContent=ramDay;
+  const p=PT[ramDay]||PT[15];
+  document.getElementById('iftarTime').textContent=p.mg;
+}
+
+// ── CLOCK ─────────────────────────────────────────────────────────────────────
+let lastMin=-1;
+function tick(){
+  const now=new Date();const todayName=DAYS[now.getDay()];
+  document.getElementById('homeClock').textContent=fmtClock(now);
+  document.getElementById('homeDate').textContent=`${DSHORT[todayName]}, ${MONTHS[now.getMonth()]} ${now.getDate()}`;
+  document.getElementById('schedNowPill').textContent=fmtClock(now);
+  const nl=document.getElementById('nowLbl');if(nl)nl.textContent=fmtClock(now);
+  const m=now.getMinutes();
+  if(m!==lastMin){lastMin=m;updateHome();if(document.getElementById('view-schedule').classList.contains('active')&&schedDay===todayName)renderSched();}
+}
+
+// ── LIVE DATA HELPERS ─────────────────────────────────────────────────────────
+window._liveAssignments = null;
+
+async function fetchLiveAssignments() {
+  if (window._liveAssignments !== null) return; // already fetched this session
+  try {
+    const PROXY = 'https://soln0m-proxy.solomon02162007.workers.dev';
+    const coursesRes = await fetch(`${PROXY}/canvas/courses?enrollment_state=active&per_page=20`);
+    if (!coursesRes.ok) return;
+    const courses = await coursesRes.json();
+    let all = [];
+    await Promise.all(courses.map(async (c) => {
+      try {
+        const r = await fetch(`${PROXY}/canvas/courses/${c.id}/assignments?bucket=upcoming&per_page=30&order_by=due_at`);
+        if (!r.ok) return;
+        const asgns = await r.json();
+        asgns.forEach(a => {
+          if (a.due_at) {
+            const courseMatch = c.name.match(/^([A-Z]+-[A-Z0-9]+)/);
+            const course = courseMatch ? courseMatch[1] : c.name.substring(0,12);
+            const desc = (a.description||'').replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').trim().substring(0,300);
+            all.push({ id: String(a.id), name: a.name, course, due: a.due_at.slice(0,10), desc });
+          }
+        });
+      } catch(e) {}
+    }));
+    all.sort((a,b) => new Date(a.due) - new Date(b.due));
+    window._liveAssignments = all;
+    // Update ASGN_MAP
+    all.forEach(a => { 
+      const safeId = a.id.replace(/[^a-zA-Z0-9]/g,'_');
+      ASGN_MAP[safeId] = a;
+      ASGN_MAP[a.id] = a;
+    });
+  } catch(e) {
+    window._liveAssignments = null;
+  }
+}
+
+function getLiveOrEmbedded() {
+  const now = new Date();
+  const src = window._liveAssignments || CANVAS_DATA;
+  return src.filter(e => new Date(e.due+'T23:59:00') >= now);
+}
+
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
 async function loadCanvas() {
   const area=document.getElementById('assignmentsArea');const status=document.getElementById('schoolSync');
   if(assignView==='month'||assignView==='week'){await fetchLiveAssignments();const events=getLiveOrEmbedded();if(assignView==='month')renderMonth(events);else renderWeek(events);return;}
@@ -962,6 +1477,7 @@ async function loadCanvas() {
   }catch(err){const events=getFilteredEvents();renderAssignments(events,status,area);if(status)status.textContent='offline · embedded data';}
 }
 
+<<<<<<< HEAD
 function renderAssignments(events,status,area) {
   const now=new Date();now.setHours(0,0,0,0);
   if(!events.length){area.innerHTML='<div class="empty-state">nothing due</div>';if(status){status.textContent='✓ all clear';status.className='view-sub sync-status ok';}return;}
@@ -983,6 +1499,68 @@ function renderAssignments(events,status,area) {
       const isDone=doneSet[a.id]||false;const safeId=a.id.replace(/[^a-zA-Z0-9]/g,'_');
       const card=document.createElement('div');card.className=`asgn-card${isDone?' done-card':''}`;card.id=`card-${safeId}`;
       card.innerHTML=`<div class="asgn-top"><div class="asgn-left"><div class="asgn-chk${isDone?' done':''}" id="chk-${safeId}" onclick="toggleDone('${safeId}')">${isDone?'✓':''}</div><div><div class="asgn-name">${a.name}</div><div class="asgn-course">${a.course}</div></div></div><div class="asgn-due ${dueClass}">${daysLabel}<br>${dueFmt}</div></div><div class="asgn-summary" id="sum-${safeId}"></div><button class="sum-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')">summarize</button>`;
+=======
+
+
+// ── ASSIGNMENTS ROUTING ───────────────────────────────────────────────────────
+function setAssignView(v){
+  currentView=v;
+  ['list','week','month'].forEach(x=>{const btn=document.getElementById('vb'+x.charAt(0).toUpperCase()+x.slice(1));if(btn)btn.classList.toggle('active',x===v);});
+  loadCanvas();
+}
+
+function renderAssignments_embed(events, status, area) {
+  const now = new Date();
+  now.setHours(0,0,0,0);
+
+  if (!events.length) { area.innerHTML='<div class="empty-state">no upcoming assignments 🎉</div>'; return; }
+
+  // Group by due date bucket
+  const buckets = { 'Today': [], 'Tomorrow': [], 'This Week': [], 'Later': [] };
+  events.forEach(e => {
+    const due = new Date(e.due + 'T00:00:00');
+    const diff = Math.round((due - now) / 86400000);
+    if (diff <= 0) buckets['Today'].push(e);
+    else if (diff === 1) buckets['Tomorrow'].push(e);
+    else if (diff <= 7) buckets['This Week'].push(e);
+    else buckets['Later'].push(e);
+  });
+
+  area.innerHTML = '';
+  const hdr = document.createElement('div'); hdr.className = 'assignments-header';
+  hdr.innerHTML = `<div class="assignments-title">${events.length} upcoming</div><button class="refresh-btn" onclick="window._liveAssignments=null;loadCanvas()">↻ refresh</button>`;
+  area.appendChild(hdr);
+
+  const doneSet = JSON.parse(sessionStorage.getItem('doneAsgn') || '{}');
+
+  Object.entries(buckets).forEach(([label, asgns]) => {
+    if (!asgns.length) return;
+    const sec = document.createElement('div'); sec.className = 'course-section';
+    sec.innerHTML = `<div class="course-name">${label}</div>`;
+    asgns.forEach(a => {
+      const due = new Date(a.due + 'T00:00:00');
+      const diff = Math.round((due - now) / 86400000);
+      const dueFmt = due.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      const dueClass = diff <= 0 ? 'urgent' : diff <= 3 ? 'soon' : '';
+      const isDone = doneSet[a.id] || false;
+      const safeId = a.id.replace(/[^a-zA-Z0-9]/g, '_');
+      const card = document.createElement('div');
+      card.className = `assignment-card${isDone ? ' done-card' : ''}`;
+      card.id = `card-${safeId}`;
+      card.innerHTML = `
+        <div class="asgn-top">
+          <div class="asgn-left">
+            <div class="asgn-chk${isDone ? ' done' : ''}" id="chk-${safeId}" onclick="toggleDone('${safeId}')">${isDone ? '✓' : ''}</div>
+            <div>
+              <div class="asgn-name">${a.name}</div>
+              <div style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--text3);margin-top:2px;">${a.course}</div>
+            </div>
+          </div>
+          <div class="asgn-due ${dueClass}">${diff <= 0 ? 'today' : diff === 1 ? 'tmrw' : diff + 'd'}<br>${dueFmt}</div>
+        </div>
+        <div class="asgn-summary" id="sum-${safeId}"></div>
+        <button class="sum-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')">✦ summarize</button>`;
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
       sec.appendChild(card);
     });
     area.appendChild(sec);
@@ -1022,6 +1600,7 @@ function renderWeek(events){
 }
 function shiftWeek(dir){weekOffset+=dir;loadCanvas();}
 
+<<<<<<< HEAD
 function toggleDone(id){
   const done=JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');done[id]=!done[id];sessionStorage.setItem('doneAsgn',JSON.stringify(done));
   const chk=document.getElementById(`chk-${id}`);const card=document.getElementById(`card-${id}`);
@@ -1051,6 +1630,132 @@ function initWorkout(){
     const div=document.createElement('div');div.className='week-day-dot';
     div.innerHTML=`<div class="week-day-label">${DAYS_SHORT_WK[d.getDay()]}</div><div class="week-day-circle${done?' done':''}${isToday?' today':''}">${done?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.8)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>':''}</div>`;
     grid.appendChild(div);
+=======
+
+// ── MONTH ─────────────────────────────────────────────────────────────────────
+function renderMonth(events){
+  const area=document.getElementById('assignmentsArea');const now=new Date();const todayStr=localDateStr(now);
+  const byDate={};events.forEach(e=>{if(!byDate[e.due])byDate[e.due]=[];byDate[e.due].push(e);});
+  const firstDay=new Date(calYear,calMonth,1).getDay();const daysInMonth=new Date(calYear,calMonth+1,0).getDate();const daysInPrev=new Date(calYear,calMonth,0).getDate();
+  let html=`<div class="cal-nav"><button class="cal-nav-btn" onclick="shiftMonth(-1)">←</button><div class="cal-nav-title">${MONTHS_LONG[calMonth]} ${calYear}</div><button class="cal-nav-btn" onclick="shiftMonth(1)">→</button></div><div class="day-panel" id="dayPanel"><div class="day-panel-title" id="dayPanelTitle"></div><div id="dayPanelItems"></div></div><div class="cal-grid">${['S','M','T','W','T','F','S'].map(d=>`<div class="cal-dow">${d}</div>`).join('')}`;
+  for(let i=0;i<firstDay;i++){html+=`<div class="cal-day other-month"><div class="cal-dn">${daysInPrev-firstDay+1+i}</div></div>`;}
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const asgns=byDate[ds]||[];const isToday=ds===todayStr;const isSel=ds===selectedDay;
+    const classes=['cal-day',isToday?'today':'',isSel?'selected':''].filter(Boolean).join(' ');
+    let dots='';asgns.slice(0,2).forEach(a=>{const due=new Date(a.due+'T23:59:00');const days=Math.ceil((due-now)/86400000);dots+=`<span class="cal-dot ${days<=0?'u':days<=3?'s':''}">${a.name.substring(0,12)}</span>`;});
+    if(asgns.length>2)dots+=`<div class="cal-more">+${asgns.length-2}</div>`;
+    html+=`<div class="${classes}" onclick="selectDay('${ds}')"><div class="cal-dn">${d}</div>${dots}</div>`;
+  }
+  const rem=(firstDay+daysInMonth)%7;for(let i=1;i<=(rem?7-rem:0);i++)html+=`<div class="cal-day other-month"><div class="cal-dn">${i}</div></div>`;
+  html+='</div>';area.innerHTML=html;
+  if(selectedDay)showDayPanel(selectedDay,events);
+}
+function shiftMonth(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderMonth(getLiveOrEmbedded());}
+function selectDay(ds){selectedDay=selectedDay===ds?null:ds;renderMonth(getLiveOrEmbedded());}
+function showDayPanel(ds,events){
+  const panel=document.getElementById('dayPanel');if(!panel)return;
+  const asgns=events.filter(e=>e.due===ds);
+  if(!asgns.length||!selectedDay){panel.classList.remove('on');return;}
+  const d=new Date(ds+'T12:00:00');
+  document.getElementById('dayPanelTitle').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  const doneSet=JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
+  document.getElementById('dayPanelItems').innerHTML=asgns.map(a=>{const safeId=a.id.replace(/[^a-zA-Z0-9]/g,'_');const isDone=doneSet[a.id]||false;return `<div class="asgn-card${isDone?' done-card':''}" id="card-${safeId}"><div class="asgn-top"><div class="asgn-left"><div class="asgn-chk${isDone?' done':''}" id="chk-${safeId}" onclick="toggleDone('${safeId}')">${isDone?'✓':''}</div><div><div class="asgn-name">${a.name}</div><div class="asgn-course">${a.course}</div></div></div></div><div class="asgn-summary" id="sum-${safeId}"></div><button class="sum-btn" id="sumbtn-${safeId}" onclick="summarize('${safeId}')">✦ summarize</button></div>`;}).join('');
+  panel.classList.add('on');
+}
+
+// ── WEEK ──────────────────────────────────────────────────────────────────────
+function renderWeek(events){
+  const area=document.getElementById('assignmentsArea');const now=new Date();const todayStr=localDateStr(now);
+  const sw=new Date(now);sw.setDate(now.getDate()-now.getDay()+weekOffset*7);sw.setHours(0,0,0,0);
+  const ew=new Date(sw);ew.setDate(sw.getDate()+6);
+  const wl=`${MONTHS[sw.getMonth()]} ${sw.getDate()} – ${MONTHS[ew.getMonth()]} ${ew.getDate()}`;
+  const byDate={};events.forEach(e=>{if(!byDate[e.due])byDate[e.due]=[];byDate[e.due].push(e);});
+  const days=[];for(let i=0;i<7;i++){const d=new Date(sw);d.setDate(sw.getDate()+i);days.push(d);}
+  const doneSet=JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
+  const cols=days.map(d=>{
+    const ds=localDateStr(d);const asgns=byDate[ds]||[];const isToday=ds===todayStr;
+    const cards=asgns.length?asgns.map(a=>{const due=new Date(a.due+'T23:59:00');const dl=Math.ceil((due-now)/86400000);const cls=dl<=0?'u':dl<=3?'s':'';const sid=a.id.replace(/[^a-zA-Z0-9]/g,'_');return `<div class="week-card ${cls}" id="card-${sid}"><div class="week-card-name">${a.name}</div><div class="week-card-course">${a.course}</div></div>`;}).join(''):`<div class="week-empty">—</div>`;
+    return `<div class="week-col${isToday?' is-today':''}"><div class="week-col-hdr"><div class="week-dow">${['S','M','T','W','T','F','S'][d.getDay()]}</div><div class="week-num">${d.getDate()}</div></div>${cards}</div>`;
+  }).join('');
+  area.innerHTML=`<div class="week-nav"><button class="cal-nav-btn" onclick="shiftWeek(-1)">←</button><div class="week-nav-title">${wl}</div><button class="cal-nav-btn" onclick="shiftWeek(1)">→</button></div><div class="week-cols">${cols}</div>`;
+}
+function shiftWeek(dir){weekOffset+=dir;loadCanvas();}
+
+// ── LOAD CANVAS ───────────────────────────────────────────────────────────────
+async function loadCanvas(){
+  const area=document.getElementById('assignmentsArea');
+  const status=document.getElementById('schoolSyncStatus');
+  if(currentView==='month'||currentView==='week'){await fetchLiveAssignments();const events=getLiveOrEmbedded();if(currentView==='month')renderMonth(events);else renderWeek(events);return;}
+  status.textContent='syncing...';area.innerHTML='<div class="empty-state">loading...</div>';
+  try{
+    const PROXY='https://soln0m-proxy.solomon02162007.workers.dev';const now=new Date();
+    const cr=await fetch(`${PROXY}/canvas/courses?enrollment_state=active&per_page=20`);
+    if(!cr.ok)throw new Error('fetch failed');const courses=await cr.json();
+    let all=[];
+    await Promise.all(courses.map(async c=>{
+      try{const r=await fetch(`${PROXY}/canvas/courses/${c.id}/assignments?bucket=upcoming&per_page=30&order_by=due_at`);if(!r.ok)return;
+        const asgns=await r.json();
+        asgns.forEach(a=>{if(a.due_at){const cm=c.name.match(/^([A-Z]+-[A-Z0-9]+)/);const course=cm?cm[1]:c.name.substring(0,12);const desc=(a.description||'').replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').trim().substring(0,300);all.push({id:String(a.id),name:a.name,course,due:a.due_at.slice(0,10),desc});}});
+      }catch(e){}
+    }));
+    all.sort((a,b)=>new Date(a.due)-new Date(b.due));
+    window._liveAssignments=all;all.forEach(a=>{const sid=a.id.replace(/[^a-zA-Z0-9]/g,'_');ASGN_MAP[sid]=a;ASGN_MAP[a.id]=a;});
+    const upcoming=all.filter(e=>new Date(e.due+'T23:59:00')>=now);
+    renderAssignments_embed(upcoming,status,area);
+    status.textContent=`✓ live · ${upcoming.length} assignments`;
+    const urgent=upcoming.filter(e=>Math.ceil((new Date(e.due+'T23:59:00')-now)/86400000)<=3).length;
+    const badge=document.getElementById('schoolBadge');
+    if(urgent>0){badge.textContent=`${urgent} urgent`;badge.className='card-badge urgent';}
+    else{badge.textContent=`${upcoming.length} upcoming`;badge.className='card-badge ok';}
+    document.getElementById('schoolCardSub').textContent=upcoming[0]?upcoming[0].name.substring(0,38)+'...':'all clear ✓';
+  }catch(err){
+    const events=getFilteredEvents();renderAssignments_embed(events,status,area);status.textContent='embedded data';
+  }
+}
+
+function toggleDone(id) {
+  const done = JSON.parse(sessionStorage.getItem('doneAsgn')||'{}');
+  done[id] = !done[id];
+  sessionStorage.setItem('doneAsgn', JSON.stringify(done));
+  const chk = document.getElementById(`chk-${id}`);
+  const card = document.getElementById(`card-${id}`);
+  chk.classList.toggle('done',done[id]); chk.textContent=done[id]?'✓':'';
+  card.classList.toggle('done-card',done[id]);
+}
+
+async function summarize(safeId) {
+  // Try direct lookup first, then search by safeId match
+  let a = ASGN_MAP[safeId];
+  if (!a) {
+    // Search live assignments
+    const src = window._liveAssignments || CANVAS_DATA;
+    a = src.find(x => x.id.replace(/[^a-zA-Z0-9]/g,'_') === safeId);
+  }
+  if (!a) { console.log('summarize: no assignment found for', safeId); return; }
+  const sumEl = document.getElementById(`sum-${safeId}`);
+  const btn = document.getElementById(`sumbtn-${safeId}`);
+  if (!sumEl) return;
+  sumEl.className = 'asgn-summary loading visible';
+  sumEl.textContent = 'summarizing...';
+  if (btn) btn.style.display = 'none';
+  try {
+    const prompt = `Summarize this college assignment in 2-3 short bullet points. Be practical — what needs to be done, key requirements, rough difficulty. Under 80 words total.\n\nAssignment: ${a.name}\n${a.desc?'Details: '+a.desc:'No details available.'}`;
+    const res = await fetch('https://soln0m-proxy.solomon02162007.workers.dev', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt })
+    });
+    const data = await res.json();
+    const text = data.text || 'Could not summarize.';
+    sumEl.className = 'asgn-summary visible';
+    sumEl.innerHTML = text.replace(/\n/g,'<br>');
+  } catch(e) {
+    console.error('Summarize error:', e);
+    sumEl.className = 'asgn-summary visible';
+    sumEl.textContent = 'Could not load summary: ' + e.message;
+    if (btn) btn.style.display = 'inline-block';
+>>>>>>> 49ab4eccf8d4df0c8c5e247152719ae95b87d8b6
   }
   const todayMuscles=data[today]||[];
   document.querySelectorAll('#workout .body-svg .muscle').forEach(el=>{el.classList.toggle('active',todayMuscles.includes(el.dataset.muscle));});
@@ -1105,6 +1810,42 @@ updateHomeCards();updateNextPrayer();updateSemBars();tick();
 setInterval(tick,1000);setInterval(updateNextPrayer,30000);
 loadWeather();
 
+
+// ── THM ───────────────────────────────────────────────────────────────────────
+async function loadTHM(){
+  try{
+    const res=await fetch('https://tryhackme.com/api/user/rank?username=ripms');
+    if(!res.ok)throw new Error();
+    const data=await res.json();
+    document.getElementById('thmRank').textContent='rank '+(data.userRank||'—');
+    document.getElementById('thmStats').innerHTML=`<div class="thm-stat"><div class="thm-stat-lbl">Points</div><div class="thm-stat-val">${data.points||'—'}</div></div><div class="thm-stat"><div class="thm-stat-lbl">Rooms</div><div class="thm-stat-val">${data.completedRooms||'—'}</div></div>`;
+  }catch(e){
+    document.getElementById('thmRank').textContent='ripms';
+    document.getElementById('thmStats').innerHTML='<div style="color:var(--text3);font-size:12px;">open TryHackMe to see live stats</div>';
+  }
+}
+
+// ── BORED ─────────────────────────────────────────────────────────────────────
+async function imBored(){
+  const result=document.getElementById('boredResult');
+  result.className='bored-result visible';result.textContent='thinking...';
+  const now=new Date();const h=now.getHours();
+  const tod=h<12?'morning':h<17?'afternoon':h<21?'evening':'late night';
+  const ramDay=getRamDay();const p=PT[ramDay]||PT[15];
+  try{
+    const res=await fetch('https://soln0m-proxy.solomon02162007.workers.dev',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt:`You're helping Solo, a 19-year-old Yemeni-American CS student who's bored. It's ${tod} (${fmtClock(now)}). Ramadan day ${ramDay}, iftar at ${p.mg}. He's into: cybersecurity/red teaming (TryHackMe username ripms), Minecraft mace pvp, talking to his girlfriend, working out. Give him 3 short punchy suggestions for right now based on the time. Be casual like a friend, no bullet points. Max 55 words.`})
+    });
+    const data=await res.json();result.textContent=data.text||'Go on TryHackMe bro lol';
+  }catch(e){result.textContent='Go on TryHackMe or call your girl lol';}
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+const ASGN_MAP={};
+CANVAS_DATA.forEach(a=>{const sid=a.id.replace(/[^a-zA-Z0-9]/g,'_');ASGN_MAP[sid]=a;ASGN_MAP[a.id]=a;});
+
+updateHome();tick();setInterval(tick,1000);
 </script>
 </body>
 </html>
