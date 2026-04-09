@@ -409,17 +409,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
       </div>
     </div>
-    <div class="card card-workout" onclick="nav('workout')">
-      <div class="card-top">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22"><path d="M16 4v16h-2V4H8V24h16v-16h2v16h16v-24H32z"/></svg></div>
-        <div class="card-badge" id="workout-streak">—</div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-label">training</div>
-        <div class="card-title">Workout</div>
-        <div class="card-sub" id="workout-sub">tap to log</div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -491,88 +480,147 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="week-grid" id="workoutGrid"></div>
     </div>
 
-    <!-- Body figure -->
+    <!-- Body figure - Strong app style -->
     <div class="gc">
       <div class="gc-label">tap what you trained</div>
       <div class="body-figure">
-        <!-- FRONT -->
         <div class="body-view">
           <div class="body-view-label">front</div>
-          <svg class="body-svg" width="100" height="200" viewBox="0 0 100 200">
-            <!-- Body outline -->
-            <ellipse class="outline" cx="50" cy="22" rx="14" ry="14"/>
-            <path class="outline" d="M28 42 Q25 60 26 80 L28 120 L32 160 L36 185 L42 185 L44 155 L50 135 L56 155 L58 185 L64 185 L68 160 L72 120 L74 80 Q75 60 72 42 Z"/>
-            <!-- Chest left -->
-            <path class="muscle" data-muscle="Chest" d="M34 48 Q40 45 48 47 L47 62 Q40 65 33 60 Z" onclick="toggleMuscle('Chest')"/>
-            <!-- Chest right -->
-            <path class="muscle" data-muscle="Chest" d="M66 48 Q60 45 52 47 L53 62 Q60 65 67 60 Z" onclick="toggleMuscle('Chest')"/>
-            <!-- Shoulders left -->
-            <ellipse class="muscle" data-muscle="Shoulders" cx="26" cy="50" rx="7" ry="9" onclick="toggleMuscle('Shoulders')"/>
-            <!-- Shoulders right -->
-            <ellipse class="muscle" data-muscle="Shoulders" cx="74" cy="50" rx="7" ry="9" onclick="toggleMuscle('Shoulders')"/>
-            <!-- Arms left (bicep) -->
-            <path class="muscle" data-muscle="Arms" d="M21 62 Q17 70 18 82 Q22 85 27 82 Q27 70 26 62 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Arms right (bicep) -->
-            <path class="muscle" data-muscle="Arms" d="M79 62 Q83 70 82 82 Q78 85 73 82 Q73 70 74 62 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Forearms left -->
-            <path class="muscle" data-muscle="Arms" d="M18 84 Q15 95 17 105 Q21 107 25 104 Q26 93 27 84 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Forearms right -->
-            <path class="muscle" data-muscle="Arms" d="M82 84 Q85 95 83 105 Q79 107 75 104 Q74 93 73 84 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Core / abs -->
-            <rect class="muscle" data-muscle="Core" x="39" y="65" width="10" height="8" rx="2" onclick="toggleMuscle('Core')"/>
-            <rect class="muscle" data-muscle="Core" x="51" y="65" width="10" height="8" rx="2" onclick="toggleMuscle('Core')"/>
-            <rect class="muscle" data-muscle="Core" x="39" y="75" width="10" height="8" rx="2" onclick="toggleMuscle('Core')"/>
-            <rect class="muscle" data-muscle="Core" x="51" y="75" width="10" height="8" rx="2" onclick="toggleMuscle('Core')"/>
-            <rect class="muscle" data-muscle="Core" x="39" y="85" width="10" height="7" rx="2" onclick="toggleMuscle('Core')"/>
-            <rect class="muscle" data-muscle="Core" x="51" y="85" width="10" height="7" rx="2" onclick="toggleMuscle('Core')"/>
-            <!-- Quads left -->
-            <path class="muscle" data-muscle="Legs" d="M33 122 Q28 135 29 152 Q34 156 40 153 Q42 136 41 122 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Quads right -->
-            <path class="muscle" data-muscle="Legs" d="M67 122 Q72 135 71 152 Q66 156 60 153 Q58 136 59 122 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Calves front left -->
-            <path class="muscle" data-muscle="Legs" d="M31 158 Q29 170 30 180 Q34 182 38 179 Q39 169 38 157 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Calves front right -->
-            <path class="muscle" data-muscle="Legs" d="M69 158 Q71 170 70 180 Q66 182 62 179 Q61 169 62 157 Z" onclick="toggleMuscle('Legs')"/>
+          <svg class="body-svg" width="95" height="240" viewBox="0 0 95 240">
+            <!-- head -->
+            <ellipse cx="47.5" cy="16" rx="11" ry="13" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+            <!-- neck -->
+            <path d="M43 27 L52 27 L51 34 L44 34Z" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+            <!-- torso -->
+            <path d="M32 36 Q28 46 27 62 Q26 78 27 96 Q28 108 32 115 Q39 120 47.5 120 Q56 120 63 115 Q67 108 68 96 Q69 78 68 62 Q67 46 63 36 Q57 32 47.5 32 Q38 32 32 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>
+            <!-- upper arm L -->
+            <path d="M32 36 Q21 43 19 56 Q17 69 18 80 Q22 87 28 84 Q31 72 32 58 Q33 46 33 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- upper arm R -->
+            <path d="M63 36 Q74 43 76 56 Q78 69 77 80 Q73 87 67 84 Q64 72 63 58 Q62 46 62 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- forearm L -->
+            <path d="M18 82 Q13 93 14 104 Q16 111 21 112 Q26 110 28 102 Q28 92 28 84Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- forearm R -->
+            <path d="M77 82 Q82 93 81 104 Q79 111 74 112 Q69 110 67 102 Q67 92 67 84Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- leg L -->
+            <path d="M31 120 Q25 135 24 158 Q23 178 25 198 Q27 212 32 218 Q38 222 44 218 Q48 206 48 183 Q48 158 47 135 L46 120Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- leg R -->
+            <path d="M64 120 Q70 135 71 158 Q72 178 70 198 Q68 212 63 218 Q57 222 51 218 Q47 206 47 183 Q47 158 48 135 L49 120Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- feet -->
+            <ellipse cx="36" cy="219" rx="9" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+            <ellipse cx="59" cy="219" rx="9" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+
+            <!-- CHEST L -->
+            <path class="muscle" data-muscle="Chest" onclick="toggleMuscle('Chest')" d="M33 40 Q40 36 47 38 L46 56 Q39 59 33 54Z"/>
+            <!-- CHEST R -->
+            <path class="muscle" data-muscle="Chest" onclick="toggleMuscle('Chest')" d="M62 40 Q55 36 48 38 L49 56 Q56 59 62 54Z"/>
+
+            <!-- FRONT DELT L -->
+            <path class="muscle" data-muscle="Shoulders" onclick="toggleMuscle('Shoulders')" d="M32 36 Q25 40 21 50 Q23 58 30 57 Q33 50 34 42Z"/>
+            <!-- FRONT DELT R -->
+            <path class="muscle" data-muscle="Shoulders" onclick="toggleMuscle('Shoulders')" d="M63 36 Q70 40 74 50 Q72 58 65 57 Q62 50 61 42Z"/>
+
+            <!-- BICEP L -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M19 57 Q14 66 15 78 Q20 84 27 81 Q30 70 31 59Z"/>
+            <!-- BICEP R -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M76 57 Q81 66 80 78 Q75 84 68 81 Q65 70 64 59Z"/>
+
+            <!-- FOREARM L -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M15 80 Q11 91 12 103 Q15 110 21 109 Q26 101 27 91 Q26 84 20 82Z"/>
+            <!-- FOREARM R -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M80 80 Q84 91 83 103 Q80 110 74 109 Q69 101 68 91 Q69 84 75 82Z"/>
+
+            <!-- ABS — 3 rows x 2 cols -->
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M34 59 Q40 57 46 58 L45 67 Q40 69 34 67Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M61 59 Q55 57 49 58 L50 67 Q55 69 61 67Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M34 69 Q40 67 46 68 L45 77 Q40 79 34 77Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M61 69 Q55 67 49 68 L50 77 Q55 79 61 77Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M34 79 Q40 77 46 78 L45 87 Q40 89 34 87Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M61 79 Q55 77 49 78 L50 87 Q55 89 61 87Z"/>
+            <!-- OBLIQUES -->
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M28 61 Q25 70 26 84 Q30 87 33 85 L34 70 L33 60Z"/>
+            <path class="muscle" data-muscle="Core" onclick="toggleMuscle('Core')" d="M67 61 Q70 70 69 84 Q65 87 62 85 L61 70 L62 60Z"/>
+
+            <!-- QUAD L -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M31 124 Q25 140 25 162 Q26 180 29 195 Q35 199 43 196 Q46 178 45 158 Q45 138 44 124Z"/>
+            <!-- QUAD R -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M64 124 Q70 140 70 162 Q69 180 66 195 Q60 199 52 196 Q49 178 50 158 Q50 138 51 124Z"/>
+
+            <!-- CALF L -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M27 198 Q23 209 25 217 Q29 221 35 218 Q38 209 37 198Z"/>
+            <!-- CALF R -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M68 198 Q72 209 70 217 Q66 221 60 218 Q57 209 58 198Z"/>
           </svg>
         </div>
-        <!-- BACK -->
+
         <div class="body-view">
           <div class="body-view-label">back</div>
-          <svg class="body-svg" width="100" height="200" viewBox="0 0 100 200">
-            <ellipse class="outline" cx="50" cy="22" rx="14" ry="14"/>
-            <path class="outline" d="M28 42 Q25 60 26 80 L28 120 L32 160 L36 185 L42 185 L44 155 L50 135 L56 155 L58 185 L64 185 L68 160 L72 120 L74 80 Q75 60 72 42 Z"/>
-            <!-- Traps -->
-            <path class="muscle" data-muscle="Back" d="M36 42 Q43 38 50 36 Q57 38 64 42 Q58 52 50 54 Q42 52 36 42 Z" onclick="toggleMuscle('Back')"/>
-            <!-- Shoulders back left -->
-            <ellipse class="muscle" data-muscle="Shoulders" cx="26" cy="50" rx="7" ry="9" onclick="toggleMuscle('Shoulders')"/>
-            <!-- Shoulders back right -->
-            <ellipse class="muscle" data-muscle="Shoulders" cx="74" cy="50" rx="7" ry="9" onclick="toggleMuscle('Shoulders')"/>
-            <!-- Lats left -->
-            <path class="muscle" data-muscle="Back" d="M28 55 Q24 65 26 80 Q31 82 36 78 Q36 65 36 55 Z" onclick="toggleMuscle('Back')"/>
-            <!-- Lats right -->
-            <path class="muscle" data-muscle="Back" d="M72 55 Q76 65 74 80 Q69 82 64 78 Q64 65 64 55 Z" onclick="toggleMuscle('Back')"/>
-            <!-- Lower back -->
-            <path class="muscle" data-muscle="Back" d="M38 82 Q44 80 50 80 Q56 80 62 82 L62 100 Q56 103 50 103 Q44 103 38 100 Z" onclick="toggleMuscle('Back')"/>
-            <!-- Triceps left -->
-            <path class="muscle" data-muscle="Arms" d="M20 62 Q16 72 17 82 Q21 84 26 82 Q26 72 25 62 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Triceps right -->
-            <path class="muscle" data-muscle="Arms" d="M80 62 Q84 72 83 82 Q79 84 74 82 Q74 72 75 62 Z" onclick="toggleMuscle('Arms')"/>
-            <!-- Glutes left -->
-            <path class="muscle" data-muscle="Legs" d="M32 108 Q28 118 30 128 Q36 132 42 128 Q43 118 42 108 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Glutes right -->
-            <path class="muscle" data-muscle="Legs" d="M68 108 Q72 118 70 128 Q64 132 58 128 Q57 118 58 108 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Hamstrings left -->
-            <path class="muscle" data-muscle="Legs" d="M32 130 Q28 143 29 155 Q34 158 40 155 Q41 142 40 130 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Hamstrings right -->
-            <path class="muscle" data-muscle="Legs" d="M68 130 Q72 143 71 155 Q66 158 60 155 Q59 142 60 130 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Calves back left -->
-            <path class="muscle" data-muscle="Legs" d="M31 158 Q28 170 30 180 Q34 183 38 180 Q39 169 38 157 Z" onclick="toggleMuscle('Legs')"/>
-            <!-- Calves back right -->
-            <path class="muscle" data-muscle="Legs" d="M69 158 Q72 170 70 180 Q66 183 62 180 Q61 169 62 157 Z" onclick="toggleMuscle('Legs')"/>
+          <svg class="body-svg" width="95" height="240" viewBox="0 0 95 240">
+            <!-- head -->
+            <ellipse cx="47.5" cy="16" rx="11" ry="13" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+            <!-- neck -->
+            <path d="M43 27 L52 27 L51 34 L44 34Z" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+            <!-- torso -->
+            <path d="M32 36 Q28 46 27 62 Q26 78 27 96 Q28 108 32 115 Q39 120 47.5 120 Q56 120 63 115 Q67 108 68 96 Q69 78 68 62 Q67 46 63 36 Q57 32 47.5 32 Q38 32 32 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>
+            <!-- upper arm L -->
+            <path d="M32 36 Q21 43 19 56 Q17 69 18 80 Q22 87 28 84 Q31 72 32 58 Q33 46 33 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- upper arm R -->
+            <path d="M63 36 Q74 43 76 56 Q78 69 77 80 Q73 87 67 84 Q64 72 63 58 Q62 46 62 36Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- forearm L -->
+            <path d="M18 82 Q13 93 14 104 Q16 111 21 112 Q26 110 28 102 Q28 92 28 84Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- forearm R -->
+            <path d="M77 82 Q82 93 81 104 Q79 111 74 112 Q69 110 67 102 Q67 92 67 84Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <!-- legs -->
+            <path d="M31 120 Q25 135 24 158 Q23 178 25 198 Q27 212 32 218 Q38 222 44 218 Q48 206 48 183 Q48 158 47 135 L46 120Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <path d="M64 120 Q70 135 71 158 Q72 178 70 198 Q68 212 63 218 Q57 222 51 218 Q47 206 47 183 Q47 158 48 135 L49 120Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+            <ellipse cx="36" cy="219" rx="9" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+            <ellipse cx="59" cy="219" rx="9" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+
+            <!-- TRAPS -->
+            <path class="muscle" data-muscle="Back" onclick="toggleMuscle('Back')" d="M36 34 Q42 30 47.5 28 Q53 30 59 34 Q54 46 47.5 49 Q41 46 36 34Z"/>
+
+            <!-- REAR DELT L -->
+            <path class="muscle" data-muscle="Shoulders" onclick="toggleMuscle('Shoulders')" d="M32 36 Q24 41 21 51 Q23 59 30 57 Q33 50 34 42Z"/>
+            <!-- REAR DELT R -->
+            <path class="muscle" data-muscle="Shoulders" onclick="toggleMuscle('Shoulders')" d="M63 36 Q71 41 74 51 Q72 59 65 57 Q62 50 61 42Z"/>
+
+            <!-- TRICEP L -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M19 57 Q14 68 15 79 Q20 85 27 82 Q30 71 31 59Z"/>
+            <!-- TRICEP R -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M76 57 Q81 68 80 79 Q75 85 68 82 Q65 71 64 59Z"/>
+
+            <!-- FOREARM L back -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M15 80 Q11 91 12 103 Q15 110 21 109 Q26 101 27 91 Q26 84 20 82Z"/>
+            <!-- FOREARM R back -->
+            <path class="muscle" data-muscle="Arms" onclick="toggleMuscle('Arms')" d="M80 80 Q84 91 83 103 Q80 110 74 109 Q69 101 68 91 Q69 84 75 82Z"/>
+
+            <!-- LAT L -->
+            <path class="muscle" data-muscle="Back" onclick="toggleMuscle('Back')" d="M27 52 Q22 65 24 82 Q29 89 36 86 Q38 72 38 58Z"/>
+            <!-- LAT R -->
+            <path class="muscle" data-muscle="Back" onclick="toggleMuscle('Back')" d="M68 52 Q73 65 71 82 Q66 89 59 86 Q57 72 57 58Z"/>
+
+            <!-- ERECTORS L -->
+            <path class="muscle" data-muscle="Back" onclick="toggleMuscle('Back')" d="M37 87 Q41 84 46 84 L45 113 Q41 114 37 111Z"/>
+            <!-- ERECTORS R -->
+            <path class="muscle" data-muscle="Back" onclick="toggleMuscle('Back')" d="M58 87 Q54 84 49 84 L50 113 Q54 114 58 111Z"/>
+
+            <!-- GLUTE L -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M30 118 Q24 131 25 144 Q31 151 41 147 Q45 135 44 120Z"/>
+            <!-- GLUTE R -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M65 118 Q71 131 70 144 Q64 151 54 147 Q50 135 51 120Z"/>
+
+            <!-- HAMSTRING L -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M25 147 Q22 162 23 178 Q27 187 35 185 Q39 171 39 155 Q39 147 36 145Z"/>
+            <!-- HAMSTRING R -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M70 147 Q73 162 72 178 Q68 187 60 185 Q56 171 56 155 Q56 147 59 145Z"/>
+
+            <!-- CALF L back -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M25 188 Q22 200 24 212 Q28 217 34 215 Q37 204 36 190Z"/>
+            <!-- CALF R back -->
+            <path class="muscle" data-muscle="Legs" onclick="toggleMuscle('Legs')" d="M70 188 Q73 200 71 212 Q67 217 61 215 Q58 204 59 190Z"/>
           </svg>
         </div>
       </div>
-      <!-- Also show cardio/fullbody as tags -->
+
       <div class="muscle-tags" id="muscleTags"></div>
       <button class="log-btn" onclick="logWorkout()">Log Today</button>
     </div>
@@ -601,12 +649,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       I'm bored — what should I do?
     </button>
     <div class="bored-result" id="boredResult"></div>
-
-    <!-- Upcoming -->
-    <div class="gc">
-      <div class="gc-label">coming up</div>
-      <div id="gcalSection"><div style="color:var(--text3);font-size:12px;font-family:var(--mono);">loading...</div></div>
-    </div>
 
     <!-- Quick links -->
     <div class="gc">
@@ -702,25 +744,6 @@ const GCAL_EVENTS = [
   {name:"Picnic + Stargazing w Isa",date:"2026-04-30",time:"4:30 PM",location:"Ulistac Natural Area"}
 ];
 
-const PRAYER_SCHEDULE = {
-  // Ramadan days (day: {fajr, dhuhr, asr, maghrib, isha})
-  19:{f:'6:17 AM',d:'1:05 PM',a:'4:35 PM',m:'7:12 PM',i:'8:30 PM'},
-  20:{f:'6:17 AM',d:'1:05 PM',a:'4:35 PM',m:'7:13 PM',i:'8:31 PM'},
-  21:{f:'6:15 AM',d:'1:04 PM',a:'4:35 PM',m:'7:14 PM',i:'8:32 PM'},
-  22:{f:'6:14 AM',d:'1:04 PM',a:'4:35 PM',m:'7:15 PM',i:'8:33 PM'},
-  23:{f:'6:12 AM',d:'1:04 PM',a:'4:36 PM',m:'7:16 PM',i:'8:34 PM'},
-  24:{f:'6:11 AM',d:'1:03 PM',a:'4:36 PM',m:'7:17 PM',i:'8:35 PM'},
-  25:{f:'6:09 AM',d:'1:03 PM',a:'4:36 PM',m:'7:18 PM',i:'8:36 PM'},
-  26:{f:'6:08 AM',d:'1:03 PM',a:'4:37 PM',m:'7:19 PM',i:'8:37 PM'},
-  27:{f:'6:06 AM',d:'1:02 PM',a:'4:37 PM',m:'7:19 PM',i:'8:38 PM'},
-  28:{f:'6:05 AM',d:'1:02 PM',a:'4:37 PM',m:'7:20 PM',i:'8:39 PM'},
-  29:{f:'6:03 AM',d:'1:02 PM',a:'4:38 PM',m:'7:21 PM',i:'8:40 PM'},
-  30:{f:'6:02 AM',d:'1:01 PM',a:'4:38 PM',m:'7:22 PM',i:'8:41 PM'},
-};
-// Post-Ramadan default (Eid onwards)
-const PRAYER_DEFAULT = {f:'5:45 AM',d:'1:00 PM',a:'4:30 PM',m:'7:25 PM',i:'8:50 PM'};
-
-
 
 function parseMin(str){if(!str)return null;const[time,period]=str.split(' ');let[h,m]=time.split(':').map(Number);if(period==='PM'&&h!==12)h+=12;if(period==='AM'&&h===12)h=0;return h*60+m;}
 function nowMin(){const n=new Date();return n.getHours()*60+n.getMinutes();}
@@ -738,49 +761,45 @@ const MUSCLES=['Chest','Back','Shoulders','Arms','Core','Legs','Cardio','Full Bo
 const EXTRA_MUSCLES=['Cardio','Full Body'];
 
 
-function buildSched(day, rd) {
-  const p = PT[rd]||PT[15];
+function buildSched(day) {
   const isTuTh = day==='tuesday'||day==='thursday';
   const isFri=day==='friday', isSat=day==='saturday', isSun=day==='sunday';
   const wake = (isFri||isSat||isSun) ? '9:00 AM' : '8:30 AM';
   const bed  = isSat ? '2:00 AM' : isFri ? '1:30 AM' : isSun ? '1:00 AM' : '12:30 AM';
   let blocks=[];
-  blocks.push({time:wake, end:p.fIq, tag:'morning', title:'Wake up + Fajr 🌅', note:`Fajr iqama ${p.fIq}`});
+
+  // Post-Ramadan prayer times for Santa Clara
+  const fajr = '5:30 AM', dhuhr = '1:00 PM', asr = '4:30 PM', maghrib = '7:30 PM', isha = '8:55 PM';
+
+  blocks.push({time:wake, end:fajr, tag:'morning', title:'Wake up', note:`Fajr ${fajr}`});
+
   if (isFri) {
-    blocks.push({time:p.fIq, end:'12:00 PM', tag:'free', title:'Free time', note:'no campus — rest, fortnite, whatever'});
-    blocks.push({time:'12:00 PM', end:'1:30 PM', tag:"jumu'ah", title:"Jumu'ah 🕌", note:'Dhuhr iqama 12:35 PM'});
-    blocks.push({time:'1:30 PM', end:p.mg, tag:'free', title:'Free time', note:'workout, fortnite, chill'});
+    blocks.push({time:fajr, end:'12:00 PM', tag:'free', title:'Free time', note:'no campus'});
+    blocks.push({time:'12:00 PM', end:'1:30 PM', tag:"jumu'ah", title:"Jumu'ah", note:'Dhuhr 12:35 PM'});
+    blocks.push({time:'1:30 PM', end:maghrib, tag:'free', title:'Free time', note:'workout, chill'});
   } else if (isSat) {
-    blocks.push({time:p.fIq, end:'1:00 PM', tag:'free', title:'Free time', note:'no obligations — sleep in, chill'});
+    blocks.push({time:fajr, end:'1:00 PM', tag:'free', title:'Free time', note:'sleep in, no obligations'});
     blocks.push({time:'1:00 PM', end:'3:30 PM', tag:'study', title:'Optional calc review', note:'only if you feel it'});
-    blocks.push({time:'3:30 PM', end:p.mg, tag:'free', title:'Free time', note:'fortnite, errands, whatever'});
+    blocks.push({time:'3:30 PM', end:maghrib, tag:'free', title:'Free time', note:'whatever you want'});
   } else if (isSun) {
-    blocks.push({time:p.fIq, end:'11:00 AM', tag:'study', title:'Calc reset', note:'review the week · prep for Monday'});
-    blocks.push({time:'11:00 AM', end:p.mg, tag:'free', title:'Free time', note:'genuinely rest'});
+    blocks.push({time:fajr, end:'11:00 AM', tag:'study', title:'Calc reset', note:'review the week, prep for Monday'});
+    blocks.push({time:'11:00 AM', end:maghrib, tag:'free', title:'Free time', note:'genuinely rest'});
   } else if (day==='monday'||day==='wednesday') {
-    blocks.push({time:p.fIq, end:'11:30 AM', tag:'study', title:'Calc window', note:'morning brain is sharpest — problems from scratch'});
+    blocks.push({time:fajr, end:'11:30 AM', tag:'study', title:'Calc window', note:'morning brain is sharpest'});
     blocks.push({time:'11:30 AM', end:'1:00 PM', tag:'home', title:'Errands / home', note:'whatever comes up'});
-    blocks.push({time:'1:00 PM', end:p.mg, tag:'free', title:'Free time', note:'your window — use it how you need'});
+    blocks.push({time:'1:00 PM', end:maghrib, tag:'free', title:'Free time', note:'your window'});
   } else {
-    blocks.push({time:p.fIq, end:'11:30 AM', tag:'study', title:day==='tuesday'?'Calc review before class':'Calc prep', note:day==='tuesday'?'redo last session before class — locks it in':'review before class'});
+    blocks.push({time:fajr, end:'11:30 AM', tag:'study', title:day==='tuesday'?'Calc review before class':'Calc prep', note:day==='tuesday'?'redo last session — locks it in':'review before class'});
     blocks.push({time:'11:30 AM', end:'12:40 PM', tag:'transit', title:'Head to campus', note:''});
-    blocks.push({time:'12:40 PM', end:'3:10 PM', tag:'calc · mth 004', title:'Calculus', note:'in-person · be present'});
-    blocks.push({time:'3:10 PM', end:p.mg, tag:'free', title:'Free time', note:'redo problems while fresh, or just decompress'});
+    blocks.push({time:'12:40 PM', end:'3:10 PM', tag:'calc', title:'Calculus', note:'in-person'});
+    blocks.push({time:'3:10 PM', end:maghrib, tag:'free', title:'Free time', note:'decompress or redo problems'});
   }
-  blocks.push({time:p.mg, end:p.iIq, tag:'maghrib · iftar', title:'Iftar + Maghrib 🌙', note:`break fast at ${p.mg}`});
-  if (isSat) {
-    blocks.push({time:p.iIq, end:'11:30 PM', tag:'taraweeh + friends', title:'Isha + Taraweeh — MCA 🕌', note:`iqama ${p.iIq} · hang with friends after`});
-    blocks.push({time:'11:30 PM', end:bed, tag:'night', title:'Night wind down', note:'home, decompress'});
-  } else if (isFri) {
-    blocks.push({time:p.iIq, end:'10:30 PM', tag:'taraweeh', title:'Isha + Taraweeh — MCA 🕌', note:`iqama ${p.iIq}`});
-    blocks.push({time:'10:30 PM', end:bed, tag:'night', title:'Night wind down', note:'home, decompress'});
-  } else {
-    blocks.push({time:p.iIq, end:p.te, tag:'taraweeh', title:'Isha + Taraweeh — MCA 🕌', note:`iqama ${p.iIq}${isTuTh?' · leave campus by '+(rd>=19?'8:15 PM':'7:30 PM'):''}`});
-    blocks.push({time:p.te, end:'10:00 PM', tag:'home', title:'Back home', note:'aim 9–9:30 PM'});
-    blocks.push({time:'10:00 PM', end:bed, tag:'night', title:'Night wind down', note:'game, decompress'});
-  }
-  blocks.push({time:bed, end:null, tag:'sleep', title:'Bed 🌙', note:`→ wake ${wake}`});
-  return {sleep:{bed,wake}, blocks, p};
+
+  blocks.push({time:maghrib, end:isha, tag:'maghrib', title:'Maghrib', note:maghrib});
+  blocks.push({time:isha, end:bed, tag:'isha + night', title:'Isha + wind down', note:`Isha ${isha}`});
+  blocks.push({time:bed, end:null, tag:'sleep', title:'Bed', note:`wake ${wake}`});
+
+  return {sleep:{bed,wake}, blocks};
 }
 
 
@@ -809,7 +828,7 @@ function nav(name) {
   if(name==='schedule'){buildSchedTabs();renderSched();}
   if(name==='school'){updateSemBars();loadCanvas();}
   if(name==='workout'){initWorkout();renderWorkoutHistory();}
-  if(name==='freetime'){loadTHM();renderGcal();}
+  if(name==='freetime'){loadTHM();}
 }
 function back() {
   const from = document.getElementById(currentScreen);
@@ -838,7 +857,7 @@ function buildSchedTabs() {
 }
 
 function renderSched() {
-  const rd=getRamDay(); const sched=buildSched(schedDay,rd);
+  const sched=buildSched(schedDay);
   const todayName=DAYS[new Date().getDay()]; const isToday=schedDay===todayName; const now=new Date();
   const titleEl=document.getElementById('schedTitle'); const subEl=document.getElementById('schedSub');
   if(titleEl) titleEl.textContent=DSHORT[schedDay]+(isToday?' · Today':'');
@@ -892,7 +911,7 @@ function tick() {
 // ── HOME CARDS ────────────────────────────────────────────────────────────────
 function updateHomeCards() {
   const now=new Date();const rd=getRamDay();const todayName=DAYS[now.getDay()];
-  const sched=buildSched(todayName,rd);const nm=nowMin();
+  const sched=buildSched(todayName);const nm=nowMin();
   const cur=sched.blocks.find(b=>{const s=parseMin(b.time);const e=b.end?parseMin(b.end):9999;return nm>=s&&nm<e;});
   const sub=document.getElementById('schedCardSub');
   if(sub&&cur)sub.textContent=cur.title.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}]/gu,'').trim();
@@ -977,7 +996,7 @@ function renderAssignments(events,status,area) {
   const now=new Date();now.setHours(0,0,0,0);
   if(!events.length){area.innerHTML='<div class="empty-state">nothing due</div>';if(status){status.textContent='✓ all clear';status.className='view-sub sync-status ok';}return;}
   const buckets={'Today':[],'Tomorrow':[],'This Week':[],'Later':[]};
-  events.forEach(e=>{const due=new Date(e.due+'T00:00:00');const diff=Math.round((due-now)/86400000);if(diff<=0)buckets['Today'].push(e);else if(diff===1)buckets['Tomorrow'].push(e);else if(diff<=7)buckets['This Week'].push(e);else buckets['Later'].push(e);});
+  events.forEach(e=>{const[ey,em,ed]=e.due.split('-').map(Number);const due=new Date(ey,em-1,ed);const diff=Math.round((due-now)/86400000);if(diff<=0)buckets['Today'].push(e);else if(diff===1)buckets['Tomorrow'].push(e);else if(diff<=7)buckets['This Week'].push(e);else buckets['Later'].push(e);});
   area.innerHTML='';
   const hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;';
   hdr.innerHTML=`<div style="font-size:15px;font-weight:600;">${events.length} upcoming</div><button class="sum-btn" onclick="window._liveAssignments=null;loadCanvas()">↻ refresh</button>`;
@@ -1007,7 +1026,7 @@ function renderMonth(events){
   const firstDay=new Date(calYear,calMonth,1).getDay();const daysInMonth=new Date(calYear,calMonth+1,0).getDate();const prev=new Date(calYear,calMonth,0).getDate();
   let html=`<div class="cal-nav"><button class="cal-nav-btn" onclick="shiftMonth(-1)">&#8592;</button><div class="cal-nav-title">${MONTHS_LONG[calMonth]} ${calYear}</div><button class="cal-nav-btn" onclick="shiftMonth(1)">&#8594;</button></div><div class="day-panel" id="dayPanel"><div class="day-panel-title" id="dayPanelTitle"></div><div id="dayPanelItems"></div></div><div class="cal-grid">${['S','M','T','W','T','F','S'].map(d=>`<div class="cal-dow">${d}</div>`).join('')}`;
   for(let i=0;i<firstDay;i++)html+=`<div class="cal-day other-month"><div class="cal-dn">${prev-firstDay+1+i}</div></div>`;
-  for(let d=1;d<=daysInMonth;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const asgns=byDate[ds]||[];const isToday=ds===todayStr;const isSel=ds===selectedDay;const cls=['cal-day',isToday?'today':'',isSel?'selected':''].filter(Boolean).join(' ');let dots='';asgns.slice(0,2).forEach(a=>{const diff=Math.round((new Date(a.due+'T00:00:00')-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);dots+=`<span class="cal-dot${diff<=0?' hot':''}">${a.name.substring(0,11)}</span>`;});if(asgns.length>2)dots+=`<div class="cal-more">+${asgns.length-2}</div>`;html+=`<div class="${cls}" onclick="selectDay('${ds}')"><div class="cal-dn">${d}</div>${dots}</div>`;}
+  for(let d=1;d<=daysInMonth;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const asgns=byDate[ds]||[];const isToday=ds===todayStr;const isSel=ds===selectedDay;const cls=['cal-day',isToday?'today':'',isSel?'selected':''].filter(Boolean).join(' ');let dots='';asgns.slice(0,2).forEach(a=>{const[may,mam,mad]=a.due.split('-').map(Number);const diff=Math.round((new Date(may,mam-1,mad)-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);dots+=`<span class="cal-dot${diff<=0?' hot':''}">${a.name.substring(0,11)}</span>`;});if(asgns.length>2)dots+=`<div class="cal-more">+${asgns.length-2}</div>`;html+=`<div class="${cls}" onclick="selectDay('${ds}')"><div class="cal-dn">${d}</div>${dots}</div>`;}
   const rem=(firstDay+daysInMonth)%7;for(let i=1;i<=(rem?7-rem:0);i++)html+=`<div class="cal-day other-month"><div class="cal-dn">${i}</div></div>`;
   html+='</div>';area.innerHTML=html;if(selectedDay)showDayPanel(selectedDay,events);
 }
@@ -1028,7 +1047,7 @@ function renderWeek(events){
   const wl=`${MONTHS[sw.getMonth()]} ${sw.getDate()} – ${MONTHS[ew.getMonth()]} ${ew.getDate()}`;
   const byDate={};events.forEach(e=>{if(!byDate[e.due])byDate[e.due]=[];byDate[e.due].push(e);});
   const days=[];for(let i=0;i<7;i++){const d=new Date(sw);d.setDate(sw.getDate()+i);days.push(d);}
-  const cols=days.map(d=>{const ds=localDateStr(d);const asgns=byDate[ds]||[];const isToday=ds===todayStr;const cards=asgns.length?asgns.map(a=>{const dl=Math.round((new Date(a.due+'T00:00:00')-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);return `<div class="week-card${dl<=0?' hot':''}"><div class="week-card-name">${a.name}</div><div class="week-card-course">${a.course}</div></div>`;}).join(''):`<div class="week-empty">—</div>`;return `<div class="week-col${isToday?' is-today':''}"><div class="week-col-hdr"><div class="week-dow">${DAYS_SHORT_WK[d.getDay()]}</div><div class="week-num">${d.getDate()}</div></div>${cards}</div>`;}).join('');
+  const cols=days.map(d=>{const ds=localDateStr(d);const asgns=byDate[ds]||[];const isToday=ds===todayStr;const cards=asgns.length?asgns.map(a=>{const[dey,dem,ded]=a.due.split('-').map(Number);const dl=Math.round((new Date(dey,dem-1,ded)-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);return `<div class="week-card${dl<=0?' hot':''}"><div class="week-card-name">${a.name}</div><div class="week-card-course">${a.course}</div></div>`;}).join(''):`<div class="week-empty">—</div>`;return `<div class="week-col${isToday?' is-today':''}"><div class="week-col-hdr"><div class="week-dow">${DAYS_SHORT_WK[d.getDay()]}</div><div class="week-num">${d.getDate()}</div></div>${cards}</div>`;}).join('');
   area.innerHTML=`<div class="week-nav"><button class="cal-nav-btn" onclick="shiftWeek(-1)">&#8592;</button><div class="week-nav-title">${wl}</div><button class="cal-nav-btn" onclick="shiftWeek(1)">&#8594;</button></div><div class="week-cols">${cols}</div>`;
 }
 function shiftWeek(dir){weekOffset+=dir;loadCanvas();}
@@ -1092,22 +1111,16 @@ function renderWorkoutHistory(){
 }
 
 // ── FREE TIME ─────────────────────────────────────────────────────────────────
-function renderGcal(){
-  const sec=document.getElementById('gcalSection');if(!sec)return;
-  const now=new Date();const todayStr=localDateStr(now);
-  const upcoming=GCAL_EVENTS.filter(e=>e.date>=todayStr).slice(0,5);
-  if(!upcoming.length){sec.innerHTML='<div style="color:var(--text3);font-size:12px;font-family:var(--mono);">nothing coming up</div>';return;}
-  sec.innerHTML=upcoming.map(e=>{const[y,m,d]=e.date.split('-').map(Number);const evDate=new Date(y,m-1,d);const diff=Math.round((evDate-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);const label=diff===0?'today':diff===1?'tomorrow':evDate.toLocaleDateString('en-US',{month:'short',day:'numeric'});return `<div class="gcal-event"><div><div class="gcal-event-name">${e.name}</div><div class="gcal-event-time">${e.time}${e.location?' · '+e.location:''}</div></div><div class="gcal-event-date">${label}</div></div>`;}).join('');
-}
+
 async function loadTHM(){
   try{const r=await fetch('https://tryhackme.com/api/user/rank?username=ripms');if(!r.ok)throw new Error();const d=await r.json();document.getElementById('thmRank').textContent='rank '+(d.userRank||'—');document.getElementById('thmStats').innerHTML=`<div class="thm-stat"><div class="thm-stat-lbl">Points</div><div class="thm-stat-val">${d.points||'—'}</div></div><div class="thm-stat"><div class="thm-stat-lbl">Rooms</div><div class="thm-stat-val">${d.completedRooms||'—'}</div></div>`;}
   catch(e){document.getElementById('thmStats').innerHTML='<div style="color:var(--text3);font-size:12px;font-family:var(--mono);">open TryHackMe to see stats</div>';}
 }
 async function imBored(){
   const result=document.getElementById('boredResult');result.className='bored-result visible';result.textContent='thinking...';
-  const now=new Date();const h=now.getHours();const tod=h<12?'morning':h<17?'afternoon':h<21?'evening':'late night';
-  const rd=getRamDay();const p=getTodayPrayers();const isRam=now<new Date(2026,2,20);
-  try{const r=await fetch('https://soln0m-proxy.solomon02162007.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:`Solo is a 19-year-old CS student who's bored. It's ${tod}. ${isRam?`Ramadan day ${rd}, iftar at ${p.m}.`:''} He's into cybersecurity (TryHackMe ripms), girlfriend Isbel, working out, YouTube. Give 3 short casual suggestions. Be like a friend, no bullets, max 50 words.`})});const d=await r.json();result.textContent=d.text||'Go on TryHackMe or call Isbel';}
+  const now=new Date();const h=now.getHours();const tod=h<6?'late night':h<12?'morning':h<17?'afternoon':h<21?'evening':'night';
+  const rd=getRamDay();const p=getTodayPrayers();const isRam=false;
+  try{const r=await fetch('https://soln0m-proxy.solomon02162007.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:`Solo is a 19-year-old CS student who's bored. It's ${tod}. He's into cybersecurity (TryHackMe ripms), girlfriend Isbel, working out, YouTube. Give 3 short casual suggestions. Be like a friend, no bullets, max 50 words.`})});const d=await r.json();result.textContent=d.text||'Go on TryHackMe or call Isbel';}
   catch(e){result.textContent='Go on TryHackMe or call Isbel';}
 }
 
